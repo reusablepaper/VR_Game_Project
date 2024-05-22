@@ -18,7 +18,7 @@ public class Ball : MonoBehaviour
     {
         lc.Subscribe(LevelState.PrePlaying, () => {
             _rigid.useGravity = false;
-            transform.position = lc.Level.BallInitialPosition;
+            //transform.position = lc.Level.BallOffset;
         });
 
         lc.Subscribe(LevelState.Playing, () => {
