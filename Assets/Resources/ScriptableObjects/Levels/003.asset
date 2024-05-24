@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f33a53a9a04a8a4c9e80aca6f4eb596, type: 3}
-  m_Name: Level0
+  m_Name: 003
   m_EditorClassIdentifier: 
-  level: 0
-  playerInitialPosition: {x: 0, y: 0, z: 0}
-  ballInitialPosition: {x: 0, y: 0, z: 0}
+  _level: 3
+  _usablePens: 000000000100000002000000030000000400000005000000
+  _playerOffset: {x: 0, y: 0, z: 0}
+  _ballOffset: {x: 0, y: 0, z: 0}
+  _goalOffset: {x: 0, y: 0, z: 0}
