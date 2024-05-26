@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class Board : MonoBehaviour
@@ -31,7 +30,8 @@ public class Board : MonoBehaviour
     public void Init(Pen pen)
     {
         transform.position = pen.transform.position + pen.transform.forward * 0.3f;
-        transform.LookAt(pen.transform.position);
+        transform.LookAt(pen.transform);
+
         pen.GetComponent<XRGrabInteractable>().deactivated.AddListener((DeactivateEventArgs args) => Finish());
 
         _line.loop = false;
