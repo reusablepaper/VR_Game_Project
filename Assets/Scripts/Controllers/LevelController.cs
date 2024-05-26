@@ -6,8 +6,17 @@ public class LevelController : MonoBehaviour
 {
     public LevelSO Level { get; set; }
 
+    public BoardSpawner BoardSpawner => _boardSpawner;
+    private BoardSpawner _boardSpawner;
+
     private LevelState _state;
     private Dictionary<LevelState, UnityEvent> _entries = new();
+
+    public void Init()
+    {
+        _boardSpawner = new GameObject("Board Spawner").AddComponent<BoardSpawner>();
+        _entries.Clear();
+    }
 
     public void SetState(LevelState levelState)
     {

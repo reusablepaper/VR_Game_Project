@@ -1,8 +1,19 @@
 public enum LevelState
 {
-    Enter,
     PrePlaying,
     Playing,
     Success,
     Fail
+}
+
+public enum PenColor
+{
+    Black,
+    Blue,
+    LightGreen,
+    Green,
+    Yellow,
+    Orange,
+    Gray,
+    Purple
 }

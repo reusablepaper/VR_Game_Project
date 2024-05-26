@@ -1,39 +1,47 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Board : MonoBehaviour
 {
     [SerializeField] private Material _baseMaterial;
+    [SerializeField] private GameObject _inputBox;
 
-    private GameObject _inputBox;
     private LineRenderer _line;
 
-    private float _minDistance = 0.015f;
-    private int _inkCount = 40;
+    private float _minDistance = 0.02f;
+    private int _inkCount = 50;
 
-    private bool IsFinished => _line.loop;
+    private bool _isFinished => _line.loop;
 
 
     private void Awake()
     {
-        _inputBox = new GameObject("Input Box");
-        _inputBox.transform.parent = gameObject.transform;
-        _inputBox.layer = gameObject.layer;
-        _inputBox.AddComponent<BoxCollider>().size = new Vector3(1.5f, 1f, 0.01f);
-
         _line = gameObject.AddComponent<LineRenderer>();
 
         _line.material = new Material(_baseMaterial);
-        _line.startWidth = 0.01f;
-        _line.endWidth = 0.01f;
+        _line.startWidth = 0.05f;
+        _line.endWidth = 0.05f;
         _line.alignment = LineAlignment.TransformZ;
         _line.positionCount = 0;
 
-        _line.material.color = new Color(0, 0, 0, 0);
+        _line.material.color = Color.clear;
+    }
+
+    public void Init(Pen pen)
+    {
+        transform.position = pen.transform.position + pen.transform.forward * 0.3f;
+        transform.LookAt(pen.transform.position);
+        pen.GetComponent<XRGrabInteractable>().deactivated.AddListener((DeactivateEventArgs args) => Finish());
+
+        _line.loop = false;
+        _line.positionCount = 0;
+        _inputBox.SetActive(true);
     }
 
     public void Draw(Vector3 pos, Color color)
     {
-        if (IsFinished) return;
+        if (_isFinished) return;
         if (_line.material.color != color)
         {
             _line.material.color = color;
@@ -51,6 +59,12 @@ public class Board : MonoBehaviour
 
     public void Finish()
     {
+        if (_line.positionCount < 2)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         _line.loop = true;
         _inputBox.SetActive(false);
 
