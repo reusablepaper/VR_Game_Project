@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
@@ -35,10 +36,19 @@ public class ResourceManager : MonoBehaviour
 
         return prefab;
     }
+    public GameObject GetPrefab(string path, int id)
+    {
+        return GetPrefab(Path.Combine(path, id.ToString("000")));
+    }
 
     public T GetPrefab<T>(string path) where T : Component
     {
         return GetPrefab(path).TryGetComponent(out T component) ? component : null;
+    }
+
+    public T GetPrefab<T>(string path, int id) where T : Component
+    {
+        return GetPrefab<T>(Path.Combine(path, id.ToString("000")));
     }
 
     public T GetSO<T>(string path) where T : ScriptableObject
@@ -66,5 +76,10 @@ public class ResourceManager : MonoBehaviour
         }
 
         return T_so;
+    }
+
+    public T GetSO<T>(string path, int id) where T : ScriptableObject
+    {
+        return GetSO<T>(Path.Combine(path, id.ToString("000")));
     }
 }

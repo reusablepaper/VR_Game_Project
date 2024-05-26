@@ -10,7 +10,8 @@ public class LevelTigger : MonoBehaviour
         lc.Init();
 
         // Map
-        GameObject level = Instantiate(rm.GetPrefab($"{Const.Prefabs_Levels}{lc.Level.Level.ToString("D3")}"));
+        GameObject level = Instantiate(rm.GetPrefab(Const.Prefabs_Levels, lc.Level.Level));
+        Instantiate(rm.GetPrefab(Const.Prefabs_Table), level.transform.position + lc.Level.TableOffset, Quaternion.identity); //±ª¿Ã ΩÕ±‰ «‘
 
         // Player
         lc.transform.position = level.transform.position + lc.Level.PlayerOffset;
