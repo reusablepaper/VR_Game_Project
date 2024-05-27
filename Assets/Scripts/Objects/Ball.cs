@@ -4,7 +4,8 @@ using UnityEngine.Events;
 public class Ball : MonoBehaviour
 {
     private Rigidbody _rigid;
-    private UnityAction _onStop; 
+    private UnityAction _onStop;
+    private Vector3 _initPosition;
 
     private void Awake()
     {
@@ -16,9 +17,11 @@ public class Ball : MonoBehaviour
 
     public void Init(LevelController lc)
     {
+        _initPosition = transform.position;
+
         lc.Subscribe(LevelState.PrePlaying, () => {
             _rigid.useGravity = false;
-            //transform.position = lc.Level.BallOffset;
+            transform.position = _initPosition;
         });
 
         lc.Subscribe(LevelState.Playing, () => {
