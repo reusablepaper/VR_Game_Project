@@ -10,25 +10,21 @@ public class MenuUI : MonoBehaviour
     [SerializeField] private Button _eraserButton;
 
     public Pen pen;
-    public LevelController lc;
+    //public LevelController lc;
     private int _index;
 
     private void Awake()
     {
+        pen.GetComponent<Rigidbody>().useGravity = false;
         _index = 0;
 
         _leftButton.onClick.AddListener(() =>
         {
             _index--;
-            pen.SetColor(lc.Level.UseablePens[_index % lc.Level.UseablePens.Count]);
+            //pen.SetColor(lc.Level.UseablePens[_index % lc.Level.UseablePens.Count]);
         });
 
-        _rightButton.onClick.AddListener(() =>
-        {
-            _index++;
-            //pen.SetColor(lc.Level.UseablePens[_index % lc.Level.UseablePens.Count]);
-            Debug.Log("¿‚»˚");
-        });
+ 
     }
     public void StartButton() 
     { 

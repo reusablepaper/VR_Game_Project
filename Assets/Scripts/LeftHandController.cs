@@ -8,8 +8,8 @@ public class LeftHandController : MonoBehaviour
 {
 
     public InputActionReference openUIReference = null;
-    public GameObject menuUI;
-
+    public GameObject menuUI=null;
+ 
     private bool _isUIActive = false;
     private bool _isTriggerPressed = false;
     private bool _wasTriggerPressed = false;
@@ -17,6 +17,8 @@ public class LeftHandController : MonoBehaviour
     private void Start()
     {
         menuUI.SetActive(false);
+ 
+        
 
     }
 
