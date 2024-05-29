@@ -6,7 +6,7 @@ public class Pen : MonoBehaviour
 {
     private Material _material;
     private LevelController _levelContoller;
-    private PenColor _color;
+    private Palette _color;
 
     private Vector3 _originalPosition;
     private Quaternion _originalRotation;
@@ -31,7 +31,7 @@ public class Pen : MonoBehaviour
         
     }
 
-    public void Init(LevelController levelController, PenColor color)
+    public void Init(LevelController levelController, Palette color)
     {
         _levelContoller = levelController;
         levelController.Subscribe(LevelState.Playing, () => gameObject.SetActive(false));
@@ -59,7 +59,7 @@ public class Pen : MonoBehaviour
             yield return _raycastTerm;
         }
     }
-    public void SetColor(PenColor color)
+    public void SetColor(Palette color)
     {
 
     }

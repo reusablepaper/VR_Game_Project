@@ -6,7 +6,7 @@ public enum LevelState
     Fail
 }
 
-public enum PenColor
+public enum Palette
 {
     Black,
     Blue,
@@ -16,4 +16,16 @@ public enum PenColor
     Orange,
     Gray,
     Purple
+}
+
+public enum LevelName
+{
+    Tutorial,
+    One,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Sandbox
 }
