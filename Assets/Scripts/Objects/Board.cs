@@ -7,6 +7,7 @@ public class Board : MonoBehaviour
     [SerializeField] private GameObject _inputBox;
 
     private LineRenderer _line;
+    private Palette _color;
 
     private float _minDistance = 0.02f;
     private int _inkCount = 50;
@@ -39,12 +40,13 @@ public class Board : MonoBehaviour
         _inputBox.SetActive(true);
     }
 
-    public void Draw(Vector3 pos, Color color)
+    public void Draw(Vector3 pos, Palette color)
     {
         if (_isFinished) return;
-        if (_line.material.color != color)
+        if (_color != color)
         {
-            _line.material.color = color;
+            _color = color;
+            _line.material.color = Util.GetColor(_color);
 
             _line.positionCount = 0;
         }

@@ -42,24 +42,17 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if(other.TryGetComponent<Board>(out Board board))
-        //{
-        //    switch (board.GetColor())
-        //    {
-        //        case ~~
-        //    }
-        //}
+        if (other.TryGetComponent(out Board board))
+        {
+            
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.TryGetComponent<Board>(out Board board))
-        //{
-        //    switch (board.GetColor())
-        //    {
-        //        case ~~
-        //    }
-        //}
+        if (collision.gameObject.TryGetComponent(out Board board))
+        {
+        }
     }
 
     private bool IsStop()

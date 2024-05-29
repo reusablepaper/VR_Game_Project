@@ -6,6 +6,7 @@ public class Pen : MonoBehaviour
 {
     private Material _material;
     private LevelController _levelContoller;
+    private Palette _color;
 
     private Vector3 _originalPosition;
     private Quaternion _originalRotation;
@@ -30,26 +31,16 @@ public class Pen : MonoBehaviour
         
     }
 
-    public void Init(LevelController levelController, PenColor color)
+    public void Init(LevelController levelController, Palette color)
     {
         _levelContoller = levelController;
         levelController.Subscribe(LevelState.Playing, () => gameObject.SetActive(false));
+        _color = color;
 
         _originalPosition = transform.position;
         _originalRotation = transform.rotation;
 
-        _material.color = color switch
-        {
-            PenColor.Black => Color.black,
-            PenColor.Blue => Color.blue,
-            PenColor.LightGreen => new Color(0.7f, 1f, 0.2f, 1f),
-            PenColor.Green => Color.green,
-            PenColor.Yellow => Color.yellow,
-            PenColor.Orange => new Color(1f, 1f, 0f, 1f),
-            PenColor.Gray => Color.gray,
-            PenColor.Purple => new Color(1f, 0f, 1f, 1f),
-            _ => Color.clear
-        };
+        _material.color = Util.GetColor(_color);
     }
 
     private IEnumerator RaycastForDrawing()
@@ -62,13 +53,13 @@ public class Pen : MonoBehaviour
             {
                 if (hit.transform.parent.TryGetComponent(out board))
                 {
-                    board.Draw(hit.point, _material.color);
+                    board.Draw(hit.point, _color);
                 }
             }
             yield return _raycastTerm;
         }
     }
-    public void SetColor(PenColor color)
+    public void SetColor(Palette color)
     {
 
     }

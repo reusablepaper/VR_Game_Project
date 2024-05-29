@@ -41,4 +41,14 @@ public class LevelController : MonoBehaviour
             entry.Invoke();
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("EnterLevel") && other.transform.parent.TryGetComponent(out Door door))
+        {
+            int level = door.GetLevel();
+
+            Level = ResourceManager.Instance.GetSO<LevelSO>(Const.ScriptableObjects_Levels, level);
+        }
+    }
 }
