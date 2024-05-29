@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/TextMesh Pro.meta
+guid: 1a072506bd450a941b2cc0893ed0a0cd
+folderAsset: yes
+DefaultImporter:
+========
 guid: 5471de2465e2b7e4da8c67b4a3eb09e7
 PrefabImporter:
+>>>>>>>> ea62ee3e69a6bd9f2a6481cc97ca11e0af8fba37:Assets/Prefabs/Levels/1Level/1LevelRoom.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
