@@ -59,4 +59,8 @@ public class Pen : MonoBehaviour
             yield return _raycastTerm;
         }
     }
+    public void SetColor(PenColor color)
+    {
+
+    }
 }
