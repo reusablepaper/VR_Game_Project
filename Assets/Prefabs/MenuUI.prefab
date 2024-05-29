@@ -212,7 +212,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4126187149417111871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +267,7 @@ MonoBehaviour:
   _lobbyButton: {fileID: 5954364110481190680}
   _eraserButton: {fileID: 4396739756674606630}
   pen: {fileID: 3095749468702338271}
+  lc: {fileID: 0}
 --- !u!1 &3619265790177216475
 GameObject:
   m_ObjectHideFlags: 0
