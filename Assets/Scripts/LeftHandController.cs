@@ -1,38 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class LeftHandController : MonoBehaviour
 {
-
-    public InputActionReference openUIReference = null;
-    public GameObject menuUI=null;
+    [SerializeField] private GameObject _rightHandUIRay;
+    [SerializeField] private InputActionReference _openUIReference;
+    [SerializeField] private GameObject _menuUI;
  
-    private bool _isUIActive = false;
-    private bool _isTriggerPressed = false;
-    private bool _wasTriggerPressed = false;
+    private bool _isUIActive => _menuUI.activeSelf;
 
     private void Start()
     {
-        menuUI.SetActive(false);
- 
-        
+        _menuUI.SetActive(false);
+        _rightHandUIRay.SetActive(false);
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        _isTriggerPressed = openUIReference.action.ReadValue<float>() > 0.1f;
-        if (_isTriggerPressed && !_wasTriggerPressed)
+        _openUIReference.action.performed += (InputAction.CallbackContext a) =>
         {
-            _isUIActive = !_isUIActive;
-            menuUI.SetActive(_isUIActive);
-        }
-
-        _wasTriggerPressed = _isTriggerPressed;
-
+            _menuUI.SetActive(!_isUIActive);
+            _rightHandUIRay.SetActive(_isUIActive);
+        };
     }
 }
