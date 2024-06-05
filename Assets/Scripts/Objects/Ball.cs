@@ -4,8 +4,9 @@ using UnityEngine.Events;
 public class Ball : MonoBehaviour
 {
     private Rigidbody _rigid;
-    private UnityAction _onStop;
     private Vector3 _initPosition;
+
+    private LevelController _levelController;
 
     private void Awake()
     {
@@ -17,6 +18,8 @@ public class Ball : MonoBehaviour
 
     public void Init(LevelController lc)
     {
+        _levelController = lc;
+
         _initPosition = transform.position;
 
         lc.Subscribe(LevelState.PrePlaying, () => {
@@ -27,8 +30,6 @@ public class Ball : MonoBehaviour
         lc.Subscribe(LevelState.Playing, () => {
             _rigid.useGravity = true;
         });
-
-        _onStop += () => lc.SetState(LevelState.Fail);
     }
 
     private void Update()
@@ -36,7 +37,7 @@ public class Ball : MonoBehaviour
         // If the ball stops, keep calling the next callback function => trigger?
         if (IsStop())
         {
-            _onStop.Invoke();
+            _levelController.SetState(LevelState.Fail);
         }
     }
 
@@ -52,6 +53,7 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Board board))
         {
+
         }
     }
 

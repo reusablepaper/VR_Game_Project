@@ -28,7 +28,8 @@ public class LevelController : MonoBehaviour
     {
         if (!_entries.TryGetValue(levelState, out UnityEvent entry))
         {
-            entry = new UnityEvent();
+            if(entry == null)
+                entry = new UnityEvent();
             _entries.Add(levelState, entry);
         }
         entry.AddListener(action);
@@ -44,7 +45,7 @@ public class LevelController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("EnterLevel") && other.transform.parent.TryGetComponent(out Door door))
+        if(other.transform.TryGetComponent(out Door door))
         {
             int level = door.GetLevel();
 

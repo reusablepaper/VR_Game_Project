@@ -1139,7 +1139,7 @@ GameObject:
   - component: {fileID: 1119516334715806163}
   - component: {fileID: 4887682360225013876}
   - component: {fileID: 3313126975561293371}
-  - component: {fileID: 6505190895745903153}
+  - component: {fileID: -8111384296823672795}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -1184,7 +1184,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 1.6
   m_Radius: 0.1
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -1348,7 +1348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Timeout: 10
   m_XROrigin: {fileID: 0}
---- !u!114 &6505190895745903153
+--- !u!114 &-8111384296823672795
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1357,9 +1357,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2956883659015629564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f14b16b34411584e8f62c859fcd5a28, type: 3}
+  m_Script: {fileID: 11500000, guid: 31718bceaa103114392a0edb3b02e7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _leftHand: {fileID: 5413567683662266292}
+  _rightHand: {fileID: 8590231954739553894}
 --- !u!1 &4843974865741018448
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,7 +1406,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

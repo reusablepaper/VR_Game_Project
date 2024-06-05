@@ -43,7 +43,7 @@ public class FadeUI : MonoBehaviour
         }
         else
         {
-            while (_image.color.a != 1)
+            while (_image.color.a < 0.99f)
             {
                 _image.color = new Color(0f, 0f, 0f, _image.color.a + 0.01f);
 

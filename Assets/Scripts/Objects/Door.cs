@@ -6,6 +6,7 @@ public class Door : MonoBehaviour
     [SerializeField] private GameObject _door;
     [SerializeField] private LevelName _level;
     [SerializeField] private Light _lamp;
+    [SerializeField] private BoxCollider _enterBox;
 
     private WaitForSeconds _sec = new WaitForSeconds(0.01f);
     private Coroutine _coroutine;
@@ -20,6 +21,8 @@ public class Door : MonoBehaviour
             _lamp.color = Util.GetColor(Palette.Orange);
         else
             _lamp.color = Color.clear;
+
+        _enterBox.enabled = false;
     }
 
     public void Open()
@@ -29,6 +32,8 @@ public class Door : MonoBehaviour
             StopCoroutine(_coroutine);
 
         _coroutine = StartCoroutine(OpenRoutine(Quaternion.Euler(0f, 0f, 0f), Quaternion.Euler(0f, 90f, 0f)));
+
+        _enterBox.enabled = true;
     }
 
     public void Close()
@@ -37,6 +42,8 @@ public class Door : MonoBehaviour
             StopCoroutine(_coroutine);
 
         _coroutine = StartCoroutine(OpenRoutine(Quaternion.Euler(0f, 90f, 0f), Quaternion.Euler(0f, 0f, 0f)));
+
+        _enterBox.enabled = false;
     }
 
     private IEnumerator OpenRoutine(Quaternion origin, Quaternion goal)

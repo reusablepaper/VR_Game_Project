@@ -4,7 +4,8 @@ public class LobbyTrigger : MonoBehaviour
 {
     private void Awake()
     {
-        LevelController lc = FindObjectOfType<LevelController>();
+        PlayerController player = FindObjectOfType<PlayerController>();
+        Util.GetOrAddComponent<LevelController>(player.gameObject);
 
         Instantiate(ResourceManager.Instance.GetPrefab(Const.Prefabs_Lobby));
     }

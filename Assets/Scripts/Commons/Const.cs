@@ -13,4 +13,6 @@ public abstract class Const
 
     public const string ScriptableObjects_Levels = "ScriptableObjects/Levels";
 
+    public const string LobbyScene = "LobbyScene";
+
 }
