@@ -7,7 +7,7 @@ public class LeftHandController : MonoBehaviour
     [SerializeField] private InputActionReference _openUIReference;
     [SerializeField] private GameObject _menuUI;
  
-    private bool _isUIActive => _menuUI.activeSelf;
+   
 
     private void Start()
     {
@@ -16,8 +16,10 @@ public class LeftHandController : MonoBehaviour
 
         _openUIReference.action.performed += (InputAction.CallbackContext a) =>
         {
-            _menuUI.SetActive(!_isUIActive);
-            _rightHandUIRay.SetActive(_isUIActive);
+            bool isUIActive=_menuUI.activeSelf;
+
+            _menuUI.SetActive(!isUIActive);
+            _rightHandUIRay.SetActive(!isUIActive);
         };
     }
 }
