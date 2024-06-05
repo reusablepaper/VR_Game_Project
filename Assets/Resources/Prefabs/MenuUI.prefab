@@ -31,8 +31,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 955986670692345467}
   - {fileID: 8119497099557667516}
+  - {fileID: 955986670692345467}
   - {fileID: 4419171973503972892}
   - {fileID: 3130252214884478503}
   - {fileID: 6082720272515986534}
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &4126187149417111871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,9 +265,8 @@ MonoBehaviour:
   _rightButton: {fileID: 8975504736385737634}
   _startButton: {fileID: 6880931006577948523}
   _lobbyButton: {fileID: 5954364110481190680}
-  _eraserButton: {fileID: 4396739756674606630}
+  _toggleButton: {fileID: 4396739756674606630}
   pen: {fileID: 3095749468702338271}
-  lc: {fileID: 0}
 --- !u!1 &3619265790177216475
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +854,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.2}
+  m_AnchoredPosition: {x: -0.2, y: -0.2}
   m_SizeDelta: {x: 0.15, y: 0.15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3539065528079122199
@@ -886,7 +885,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 445025808249f0c45b12f3d0c4402bd9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c00c1a2706f0ab740a78a4efe03184d5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -975,7 +974,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.2, y: -0.2}
+  m_AnchoredPosition: {x: 0, y: -0.2}
   m_SizeDelta: {x: 0.15, y: 0.15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5587056520354720516
@@ -1073,7 +1072,7 @@ GameObject:
   - component: {fileID: 1329809847223221230}
   - component: {fileID: 4396739756674606630}
   m_Layer: 5
-  m_Name: Eraser
+  m_Name: Toggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1126,7 +1125,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b5cc5ac1d09722c498b2f3a660baf83f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a60fa6c24a1c6a647a3d890420c63612, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
