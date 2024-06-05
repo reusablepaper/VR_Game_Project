@@ -17,9 +17,9 @@ public class MenuUI : MonoBehaviour
 
     private void Awake()
     {
+
         _lc = FindObjectOfType<LevelController>();
         _sc = FindObjectOfType<SceneController>();
-
 
         pen.GetComponent<Rigidbody>().useGravity = false;
         _index = 0;
@@ -28,43 +28,42 @@ public class MenuUI : MonoBehaviour
         _leftButton.onClick.AddListener(() =>
         {
             _index--;
-       
+                
+
         });
+
         _rightButton.onClick.AddListener(() =>
         {
-            _index++; 
+            _index++;
         });
+
         _startButton.onClick.AddListener(() =>
         {
-            _lc.SetState(LevelState.Playing);
-        });
-        _lobbyButton.onClick.AddListener(() =>
-        { 
-            _lc.SetState(LevelState.Fail);
-            _sc.ChangeScene("LobbyScene");
             Debug.Log("로비 버튼 눌림");
-            //pen.SetColor(lc.Level.UseablePens[_index % lc.Level.UseablePens.Count]);
+            //_lc.SetState(LevelState.Playing);
         });
+
+        _lobbyButton.onClick.AddListener(() =>
+        {
+            Debug.Log("로비 버튼 눌림");
+            //_lc.SetState(LevelState.Fail);
+            //_sc.ChangeScene("LobbyScene");
+       
+
+        });
+
         _toggleButton.onClick.AddListener(() =>
         {
- 
+            Debug.Log("토글 버튼 눌림");
             RectTransform buttonRectTransform = _toggleButton.GetComponent<RectTransform>();
-
-            // 버튼의 스케일을 조정하여 좌우 반전합니다.
-            if (buttonRectTransform != null)
-            {
-                Vector3 currentScale = buttonRectTransform.localScale;
-                currentScale.x = -currentScale.x;
-                buttonRectTransform.localScale = currentScale;
-            }
-            else
-            {
-                Debug.LogError("Button RectTransform component is not found.");
-            }
-            //여기에 버튼의 이미지를 좌우반전 시키는 코드 작성
+            Vector3 currentScale = buttonRectTransform.localScale;
+            currentScale.x = -currentScale.x;
+            buttonRectTransform.localScale = currentScale;
+               
+            //여기에 토글 벽 투명하게 만드는 코드 추가
 
         });
 
     }
-    
+
 }
