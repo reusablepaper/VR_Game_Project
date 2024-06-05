@@ -31,16 +31,15 @@ public class Pen : MonoBehaviour
         
     }
 
-    public void Init(LevelController levelController, Palette color)
+    public void Init(LevelController levelController)
     {
         _levelContoller = levelController;
         levelController.Subscribe(LevelState.Playing, () => gameObject.SetActive(false));
-        _color = color;
 
         _originalPosition = transform.position;
         _originalRotation = transform.rotation;
 
-        _material.color = Util.GetColor(_color);
+        SetColor(Palette.Black);
     }
 
     private IEnumerator RaycastForDrawing()
@@ -61,6 +60,8 @@ public class Pen : MonoBehaviour
     }
     public void SetColor(Palette color)
     {
+        _color = color;
 
+        _material.color = Util.GetColor(_color);
     }
 }

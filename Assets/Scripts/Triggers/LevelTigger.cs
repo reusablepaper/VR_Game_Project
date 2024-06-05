@@ -1,31 +1,29 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class LevelTigger : MonoBehaviour
 {
     private void Awake()
     {
-        LevelController lc = FindObjectOfType<LevelController>();
+        PlayerController player = FindObjectOfType<PlayerController>();
+
+        LevelController lc = player.GetComponent<LevelController>();
+        PenController pc = Util.GetOrAddComponent<PenController>(player.gameObject);
+
         ResourceManager rm = ResourceManager.Instance;
+
         lc.Init();
 
         // Map
         GameObject level = Instantiate(rm.GetPrefab(Const.Prefabs_Levels, lc.Level.Level));
-        Instantiate(rm.GetPrefab(Const.Prefabs_Table), level.transform.position + lc.Level.TableOffset, Quaternion.identity); //±ª¿Ã ΩÕ±‰ «‘
 
         // Player
         lc.transform.position = level.transform.position + lc.Level.PlayerOffset;
+        lc.transform.LookAt(new Vector3(0, player.transform.position.y, 1));
 
         // goalPoint
 
         // Pen
-        foreach (var color in lc.Level.UseablePens)
-        {
-            Pen pen = Instantiate(rm.GetPrefab<Pen>(Const.Prefabs_Pen), level.transform.position + lc.Level.TableOffset + Vector3.up, Quaternion.identity);
-
-            // what is pen's initial position?
-            pen.Init(lc, color);
-        }
+        pc.Pen.Init(lc);
 
         // Ball
         Ball ball = Instantiate(rm.GetPrefab<Ball>(Const.Prefabs_Ball), level.transform.position + lc.Level.BallOffset, Quaternion.identity);

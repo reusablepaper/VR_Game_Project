@@ -10,19 +10,15 @@ public class SceneController : MonoBehaviour
 
     private Coroutine _coroutine;
 
-    private FadeUI fadeUI;
-
-    private void Awake()
+    public void Awake()
     {
         _fadeInEvent = new();
         _fadeOutEvent = new();
-
-        fadeUI = Instantiate(ResourceManager.Instance.GetPrefab<FadeUI>(Const.Prefabs_UIs_FadeUI));
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("EnterLevel"))
+        if(other.TryGetComponent(out Door door))
         {
             ChangeScene("LevelScene");
         }
@@ -33,22 +29,26 @@ public class SceneController : MonoBehaviour
         if (_coroutine != null)
             StopCoroutine(_coroutine);
 
-        _fadeInEvent.Invoke();
 
         _coroutine = StartCoroutine(LoadSceneAsync(sceneName));
 
-        _fadeOutEvent.Invoke();
     }
 
 
     private IEnumerator LoadSceneAsync(string sceneName)
     {
+        _fadeInEvent.Invoke();
+
+        yield return new WaitForSeconds(1f);
+
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
 
         while (!async.isDone)
         {
             yield return null;
         }
+
+        _fadeOutEvent.Invoke();
     }
 
     public void AddFadeInAction(UnityAction action)

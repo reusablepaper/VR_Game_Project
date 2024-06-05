@@ -14,4 +14,8 @@ public class Util
         Palette.Purple => new Color(1f, 0f, 1f, 1f),
         _ => Color.clear
     };
+
+    public static T GetOrAddComponent<T>(GameObject gameObject) where T : Component {
+        return gameObject.TryGetComponent(out T component) ? component : gameObject.AddComponent<T>();
+    }
 }

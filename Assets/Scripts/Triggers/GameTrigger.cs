@@ -4,12 +4,14 @@ public class GameTrigger : MonoBehaviour
 {
     private void Awake()
     {
-        GameObject player = Instantiate(ResourceManager.Instance.GetPrefab(Const.Prefabs_Player));
+        PlayerController player = Instantiate(ResourceManager.Instance.GetPrefab<PlayerController>(Const.Prefabs_Player));
         DontDestroyOnLoad(player);
 
-        SceneController scene = player.AddComponent<SceneController>();
-        player.AddComponent<LevelController>();
+        SceneController scene = Util.GetOrAddComponent<SceneController>(player.gameObject);
 
-        scene.ChangeScene("LobbyScene");
+        FadeUI fadeUI = Instantiate(ResourceManager.Instance.GetPrefab<FadeUI>(Const.Prefabs_UIs_FadeUI), Camera.main.transform);
+        fadeUI.Init(scene);
+
+        scene.ChangeScene(Const.LobbyScene);
     }
 }
