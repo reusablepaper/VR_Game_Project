@@ -29,7 +29,6 @@ public class Pen : MonoBehaviour
         _levelContoller = levelController;
         levelController.Subscribe(LevelState.Playing, () => gameObject.SetActive(false));
 
-        SetColor(Palette.Black);
         InitalizePose();
 
         XRGrabInteractable _grab = GetComponent<XRGrabInteractable>();
