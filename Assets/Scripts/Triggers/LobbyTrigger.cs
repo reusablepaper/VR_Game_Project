@@ -8,5 +8,7 @@ public class LobbyTrigger : MonoBehaviour
         Util.GetOrAddComponent<LevelController>(player.gameObject);
 
         Instantiate(ResourceManager.Instance.GetPrefab(Const.Prefabs_Lobby));
+
+        player.gameObject.transform.position = Vector3.zero;
     }
 }
