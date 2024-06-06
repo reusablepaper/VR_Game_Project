@@ -31,7 +31,7 @@ public class Door : MonoBehaviour
         if(_coroutine != null)
             StopCoroutine(_coroutine);
 
-        _coroutine = StartCoroutine(OpenRoutine(Quaternion.Euler(0f, 0f, 0f), Quaternion.Euler(0f, 90f, 0f)));
+        _coroutine = StartCoroutine(OpenRoutine(Quaternion.Euler(0f, _door.transform.rotation.y + 0f, 0f), Quaternion.Euler(0f, 90f, 0f)));
 
         _enterBox.enabled = true;
     }
@@ -55,7 +55,7 @@ public class Door : MonoBehaviour
 
         while(rotation.eulerAngles.y - 90f < 0.01f) {
             rotation = Quaternion.Lerp(rotation, goal, t);
-            _door.transform.rotation = rotation;
+            _door.transform.localRotation = rotation;
 
             yield return _sec;
         }

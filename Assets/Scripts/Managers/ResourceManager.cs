@@ -21,6 +21,12 @@ public class ResourceManager : MonoBehaviour
     private Dictionary<string, GameObject> _prefabs;
     private Dictionary<string, ScriptableObject> _scriptableObjects;
 
+    public void Flush()
+    {
+        if(_prefabs != null) _prefabs.Clear();
+        if(_scriptableObjects != null) _scriptableObjects.Clear();
+    }
+
     public GameObject GetPrefab(string path)
     {
         if (_prefabs == null) _prefabs = new();

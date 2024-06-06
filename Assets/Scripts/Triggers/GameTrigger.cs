@@ -13,9 +13,6 @@ public class GameTrigger : MonoBehaviour
         player.PenController.Init(player);
         player.LeftHand.GetComponent<LeftHandController>().Init(player);
 
-        FadeUI fadeUI = Instantiate(ResourceManager.Instance.GetPrefab<FadeUI>(Const.Prefabs_UIs_FadeUI), Camera.main.transform);
-        fadeUI.Init(scene);
-
-        scene.ChangeScene(Const.LobbyScene);
+        player.SceneController.ChangeScene(Const.LobbyScene);
     }
 }
