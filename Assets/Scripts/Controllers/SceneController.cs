@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,7 @@ public class SceneController : MonoBehaviour
     private Coroutine _coroutine;
     private Renderer _faderScreenRenderer;
     private Material _faderMaterial;
+    private bool _isLobby;
 
     public void Init(PlayerController player)
     {
@@ -35,6 +37,8 @@ public class SceneController : MonoBehaviour
         if (_coroutine != null)
             StopCoroutine(_coroutine);
 
+        if(sceneName.Equals(Const.LobbyScene)) _isLobby = true;
+        else _isLobby = false;
 
         _coroutine = StartCoroutine(LoadSceneAsync(sceneName));
 
@@ -85,5 +89,9 @@ public class SceneController : MonoBehaviour
     public void AddFadeOutAction(UnityAction action)
     {
         _fadeOutEvent.AddListener(action);
+    }
+    public bool isLobby()
+    {
+        return _isLobby;
     }
 }

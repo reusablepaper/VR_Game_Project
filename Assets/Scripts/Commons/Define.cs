@@ -1,5 +1,6 @@
 public enum LevelState
 {
+    None,
     PrePlaying,
     Playing,
     Success,

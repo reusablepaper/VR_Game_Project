@@ -24,6 +24,10 @@ public class LevelController : MonoBehaviour
         _state = levelState;
         Publish();
     }
+    public LevelState GetState()
+    {
+        return _state;
+    }
 
     public void Subscribe(LevelState levelState, UnityAction action)
     {

@@ -15,6 +15,7 @@ public class LeftHandController : MonoBehaviour
     {
         MenuUI = Instantiate(ResourceManager.Instance.GetPrefab<MenuUI>(Const.Prefabs_UIs_MenuUI), player.LeftHand.transform);
         MenuUI.Init(player.LevelController, player.SceneController, player.PenController);
+      
 
         OnClickEvent = new();
 
@@ -24,11 +25,13 @@ public class LeftHandController : MonoBehaviour
         _openUIReference.action.performed += (InputAction.CallbackContext a) =>
         {
             bool isUIActive = MenuUI.gameObject.activeSelf;
+            if (!player.SceneController.isLobby())
+            {
+                MenuUI.gameObject.SetActive(!isUIActive);
+                _rightHandUIRay.SetActive(!isUIActive);
 
-            MenuUI.gameObject.SetActive(!isUIActive);
-            _rightHandUIRay.SetActive(!isUIActive);
-
-            OnClickEvent.Invoke();
+                OnClickEvent.Invoke();
+            }
         };
     }
 }

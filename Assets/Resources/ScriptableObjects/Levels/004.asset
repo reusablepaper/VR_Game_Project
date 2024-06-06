@@ -17,3 +17,4 @@ MonoBehaviour:
   _playerOffset: {x: 0, y: 0, z: 0}
   _ballOffset: {x: 0, y: 0, z: 0}
   _goalOffset: {x: 0, y: 0, z: 0}
+  _tableOffset: {x: 0, y: 0, z: 0}
