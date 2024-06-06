@@ -18,7 +18,6 @@ public class LevelTigger : MonoBehaviour
 
         // Player
         lc.transform.position = level.transform.position + lc.Level.PlayerOffset;
-        lc.transform.LookAt(new Vector3(0, player.transform.position.y, 1));
 
         // goalPoint
 
