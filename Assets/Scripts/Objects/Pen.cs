@@ -39,7 +39,6 @@ public class Pen : MonoBehaviour
             }
         });
 
-        SetColor(Palette.Black);
         InitalizePose();
 
         XRGrabInteractable _grab = GetComponent<XRGrabInteractable>();

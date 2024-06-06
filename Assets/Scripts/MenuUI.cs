@@ -22,36 +22,39 @@ public class MenuUI : MonoBehaviour
         _sc = sc;
         _pc = pc;
 
+
+        Material toggleWallMat = Resources.Load<Material>(Const.Materails_ToggleWallMat);
+
         _leftButton.onClick.AddListener(() =>
         {
-            _index--;
-
+            _pc.prevColor();
 
         });
 
         _rightButton.onClick.AddListener(() =>
         {
-            _index++;
+            _pc.nextColor();
         });
 
         _startButton.onClick.AddListener(() =>
         {
-            Debug.Log("시작 버튼 눌림");
+            _isTransparent = true;
+            setMaterialTransparent(toggleWallMat);
             _lc.SetState(LevelState.Playing);
 
         });
 
         _lobbyButton.onClick.AddListener(() =>
         {
-            Debug.Log("로비 버튼 눌림");
+            _isTransparent = false;
+            setMeterialOpaque(toggleWallMat); 
             _lc.SetState(LevelState.Fail);
             _sc.ChangeScene(Const.LobbyScene);
-
         });
 
         _toggleButton.onClick.AddListener(() =>
         {
-            Debug.Log("토글 버튼 눌림");
+   
             _isTransparent = !_isTransparent; 
 
             RectTransform buttonRectTransform = _toggleButton.GetComponent<RectTransform>();
@@ -59,25 +62,30 @@ public class MenuUI : MonoBehaviour
             currentScale.x = -currentScale.x;
             buttonRectTransform.localScale = currentScale;
 
-            //여기에 토글 벽 투명하게 만드는 코드 추가
-            Material toggleWallMat = Resources.Load<Material>(Const.Materails_ToggleWallMat);
             if(toggleWallMat != null)
-            {
+            { 
                 if (_isTransparent)
                 {
-                    toggleWallMat.color = new Color(238 / 255f, 235 / 255f, 175 / 255f); //일반 벽 color
-                    toggleWallMat.SetFloat("_Mode", 0); // Unity Standard Shader의 경우 3은 Transparent 모드
-
+                    setMeterialOpaque(toggleWallMat);
                 }
                 else
                 {
-                    toggleWallMat.color = new Color(0.0f, 1.0f, 1.0f, 0.3f); //toggle wall color
-                    toggleWallMat.SetFloat("_Mode", 3);  
+                    setMaterialTransparent(toggleWallMat);
                 }
                 
             }
         });
 
+    }
+    private void setMaterialTransparent(Material meterial)
+    {
+        meterial.color = new Color(0.0f, 1.0f, 1.0f, 0.3f); //toggle wall color
+        meterial.SetFloat("_Mode", 3); // Unity Standard Shader의 경우 3은 Transparent 모드
+    }
+    private void setMeterialOpaque(Material meterial)
+    {
+        meterial.color = new Color(238 / 255f, 235 / 255f, 175 / 255f); //일반 벽 color
+        meterial.SetFloat("_Mode", 0);
     }
 
 }
