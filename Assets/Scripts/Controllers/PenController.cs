@@ -1,14 +1,14 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class PenController : MonoBehaviour
 {
     public Pen Pen { get; private set; }
 
 
-    private void Init(PlayerController player)
+    public void Init(PlayerController player)
     {
-        Pen = ResourceManager.Instance.GetPrefab<Pen>(Const.Prefabs_Pen);
-
-        Instantiate(Pen, player.LeftHand.transform);
+        Pen = Instantiate(ResourceManager.Instance.GetPrefab<Pen>(Const.Prefabs_Pen), player.LeftHand.transform);
+        Pen.Init(player.LevelController);
     }
 }

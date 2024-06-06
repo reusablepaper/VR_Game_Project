@@ -9,11 +9,17 @@ public class SceneController : MonoBehaviour
     private UnityEvent _fadeOutEvent;
 
     private Coroutine _coroutine;
+    private Renderer _faderScreenRenderer;
+    private Material _faderMaterial;
 
-    public void Awake()
+    public void Init(PlayerController player)
     {
         _fadeInEvent = new();
         _fadeOutEvent = new();
+
+        _faderScreenRenderer = Instantiate(ResourceManager.Instance.GetPrefab<Renderer>(Const.Prefabs_FaderScreen), player.MainCamera.transform);
+        _faderMaterial = _faderScreenRenderer.material;
+        _faderMaterial.color = Color.black;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,9 +43,20 @@ public class SceneController : MonoBehaviour
 
     private IEnumerator LoadSceneAsync(string sceneName)
     {
+        _faderScreenRenderer.gameObject.SetActive(true);
+
         _fadeInEvent.Invoke();
 
-        yield return new WaitForSeconds(1f);
+        Material fadeMaterial = _faderScreenRenderer.material;
+
+        while (fadeMaterial.color.a < 0.999f)
+        {
+            fadeMaterial.color = new Color(0, 0, 0, fadeMaterial.color.a + 0.01f);
+
+            yield return null;
+        }
+
+        ResourceManager.Instance.Flush();
 
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
 
@@ -47,6 +64,15 @@ public class SceneController : MonoBehaviour
         {
             yield return null;
         }
+
+        while (fadeMaterial.color.a > 0.001f)
+        {
+            fadeMaterial.color = new Color(0, 0, 0, fadeMaterial.color.a - 0.01f);
+
+            yield return null;
+        }
+
+        _faderScreenRenderer.gameObject.SetActive(false);
 
         _fadeOutEvent.Invoke();
     }

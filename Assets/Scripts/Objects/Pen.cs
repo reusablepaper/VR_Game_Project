@@ -7,28 +7,21 @@ public class Pen : MonoBehaviour
     private Material _material;
     private LevelController _levelContoller;
     private Palette _color;
+    private Rigidbody _rigid;
 
-    private Vector3 _originalPosition;
-    private Quaternion _originalRotation;
+    private Vector3 _originalPosition = new Vector3(0f, 0.104f, 0.5f);
+    private Quaternion _originalRotation = Quaternion.Euler(new Vector3(-90f, 0f, 0f));
 
     private WaitForSeconds _raycastTerm = new WaitForSeconds(0.1f);
 
     private void Awake()
     {
         Renderer r = GetComponent<Renderer>();
+        _rigid = GetComponent<Rigidbody>();
         _material = new Material(r.material);
         r.material = _material;
 
-        XRGrabInteractable _grab = GetComponent<XRGrabInteractable>();
-        _grab.selectExited.AddListener((SelectExitEventArgs args) => transform.SetLocalPositionAndRotation(_originalPosition, _originalRotation));
-        _grab.activated.AddListener((ActivateEventArgs args) =>
-        {
-            _grab.deactivated.RemoveAllListeners();
-            _levelContoller.BoardSpawner.SpawnBoard(this);
-            StartCoroutine(nameof(RaycastForDrawing));
-            _grab.deactivated.AddListener((DeactivateEventArgs args) => StopCoroutine(nameof(RaycastForDrawing)));
-        });
-        
+        _rigid.useGravity = false;
     }
 
     public void Init(LevelController levelController)
@@ -36,10 +29,17 @@ public class Pen : MonoBehaviour
         _levelContoller = levelController;
         levelController.Subscribe(LevelState.Playing, () => gameObject.SetActive(false));
 
-        _originalPosition = transform.position;
-        _originalRotation = transform.rotation;
-
         SetColor(Palette.Black);
+        InitalizePose();
+
+        XRGrabInteractable _grab = GetComponent<XRGrabInteractable>();
+        _grab.selectExited.AddListener((SelectExitEventArgs args) => InitalizePose());
+        _grab.activated.AddListener((ActivateEventArgs args) =>
+        {
+            _levelContoller.BoardSpawner.SpawnBoard(this);
+            StartCoroutine(nameof(RaycastForDrawing));
+        });
+        _grab.deactivated.AddListener((DeactivateEventArgs args) => StopCoroutine(nameof(RaycastForDrawing)));
     }
 
     private IEnumerator RaycastForDrawing()
@@ -58,10 +58,16 @@ public class Pen : MonoBehaviour
             yield return _raycastTerm;
         }
     }
+    
     public void SetColor(Palette color)
     {
         _color = color;
 
         _material.color = Util.GetColor(_color);
+    }
+
+    public void InitalizePose()
+    {
+        transform.SetLocalPositionAndRotation(_originalPosition, _originalRotation);
     }
 }
