@@ -8,8 +8,8 @@ public class Pen : MonoBehaviour
     private LevelController _levelContoller;
     private Palette _color;
 
-    private Vector3 _originalPosition;
-    private Quaternion _originalRotation;
+    private Vector3 _originalPosition = new Vector3(0f, 0.104f, 0.2f);
+    private Quaternion _originalRotation = Quaternion.Euler(new Vector3(-90f, 0f, 0f));
 
     private WaitForSeconds _raycastTerm = new WaitForSeconds(0.1f);
 
