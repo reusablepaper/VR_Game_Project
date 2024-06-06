@@ -1,11 +1,10 @@
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 public class PlayerController : MonoBehaviour
 {
-    private int _level;
-    private GameObject _levelController;
-    private GameObject _sceneController;
+    public LevelController LevelController { get; private set; }
+    public SceneController SceneController { get; private set; }
+    public PenController PenController { get; private set; }
 
     [SerializeField] private GameObject _leftHand;
     public GameObject LeftHand => _leftHand;
@@ -13,9 +12,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _rightHand;
     public GameObject RightHand => _rightHand;
 
+    [SerializeField] private Camera _mainCamera;
+    public Camera MainCamera => _mainCamera;
+
     private void Awake()
     {
-        _level = PlayerPrefs.GetInt("Level");
+        LevelController = Util.GetOrAddComponent<LevelController>(gameObject);
+        SceneController = Util.GetOrAddComponent<SceneController>(gameObject);
+        PenController = Util.GetOrAddComponent<PenController>(gameObject);
+        //_level = PlayerPrefs.GetInt("Level");
     }
 
 

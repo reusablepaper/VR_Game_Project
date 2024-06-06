@@ -9,7 +9,7 @@ public abstract class Const
     public const string Prefabs_Levels = "Prefabs/Levels";
     public const string Prefabs_Lobby = "Prefabs/MainLobby";
 
-    public const string Prefabs_UIs_FadeUI = "Prefabs/UIs/FadeUI";
+    public const string Prefabs_FaderScreen = "Prefabs/FaderScreen";
 
     public const string ScriptableObjects_Levels = "ScriptableObjects/Levels";
 
