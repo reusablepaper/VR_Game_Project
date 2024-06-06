@@ -30,25 +30,6 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        if (_instance == null)
-        {
-            GameObject go = GameObject.Find("SoundManager");
-            //없으면 생성
-            if (go == null)
-            {
-                go = new GameObject { name = "SoundManager" };
-            }
-            if (go.GetComponent<SoundManager>() == null)
-            {
-                go.AddComponent<SoundManager>();
-            }
-
-            DontDestroyOnLoad(go);
-
-            //instance 할당
-            _instance = go.GetComponent<SoundManager>();
-        }
-
         Init();
     }
 

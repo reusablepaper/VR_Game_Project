@@ -30,3 +30,10 @@ public enum LevelName
     Six,
     Sandbox
 }
+
+public enum SFX
+{
+    DoorOpen = 0,
+    Bounce = 1,
+
+}

@@ -6,6 +6,8 @@ public class Ball : MonoBehaviour
     private LevelController _levelController;
     private Vector3 _initPosition;
 
+    [SerializeField] private AudioClip _bounceSFX;
+
     private void Awake()
     {
         Rigidbody = Util.GetOrAddComponent<Rigidbody>(gameObject);
@@ -39,5 +41,10 @@ public class Ball : MonoBehaviour
     private bool IsStop()
     {
         return Rigidbody.velocity.magnitude < 0.01f;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        SoundManager.Instance.PlaySFX(_bounceSFX);
     }
 }

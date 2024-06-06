@@ -16,4 +16,5 @@ public abstract class Const
 
     public const string LobbyScene = "LobbyScene";
 
+    public const string Sounds = "Sounds/";
 }
