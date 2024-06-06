@@ -4,13 +4,17 @@ using UnityEngine;
 public class BoardSpawner : MonoBehaviour
 {
     private List<Board> _boards;
+    private PenController _penController;
 
-    private void Awake()
+
+    public void Init(PenController pc)
     {
+        _penController = pc;
+
         _boards = new();
     }
 
-    public void SpawnBoard(Pen pen)
+    public void SpawnBoard()
     {
         Board board = null;
 
@@ -30,6 +34,6 @@ public class BoardSpawner : MonoBehaviour
             _boards.Add(board);
         }
 
-        board.Init(pen);
+        board.Init(_penController);
     }
 }

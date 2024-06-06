@@ -12,9 +12,10 @@ public class LevelController : MonoBehaviour
     private LevelState _state;
     private Dictionary<LevelState, UnityEvent> _entries = new();
 
-    public void Init()
+    public void Init(PenController pc)
     {
         _boardSpawner = new GameObject("Board Spawner").AddComponent<BoardSpawner>();
+        _boardSpawner.Init(pc);
         _entries.Clear();
     }
 

@@ -1,19 +1,14 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Ball : MonoBehaviour
-{
-    private Rigidbody _rigid;
-    private Vector3 _initPosition;
+{    public Rigidbody Rigidbody { get; private set; }
 
     private LevelController _levelController;
+    private Vector3 _initPosition;
 
     private void Awake()
     {
-        if(!TryGetComponent(out _rigid))
-        {
-            _rigid = gameObject.AddComponent<Rigidbody>();
-        }
+        Rigidbody = Util.GetOrAddComponent<Rigidbody>(gameObject);
     }
 
     public void Init(LevelController lc)
@@ -23,12 +18,12 @@ public class Ball : MonoBehaviour
         _initPosition = transform.position;
 
         lc.Subscribe(LevelState.PrePlaying, () => {
-            _rigid.useGravity = false;
+            Rigidbody.useGravity = false;
             transform.position = _initPosition;
         });
 
         lc.Subscribe(LevelState.Playing, () => {
-            _rigid.useGravity = true;
+            Rigidbody.useGravity = true;
         });
     }
 
@@ -41,24 +36,8 @@ public class Ball : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent(out Board board))
-        {
-            
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.TryGetComponent(out Board board))
-        {
-
-        }
-    }
-
     private bool IsStop()
     {
-        return _rigid.velocity.magnitude < 0.01f;
+        return Rigidbody.velocity.magnitude < 0.01f;
     }
 }

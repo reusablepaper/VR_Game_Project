@@ -11,7 +11,7 @@ public class LevelTigger : MonoBehaviour
 
         ResourceManager rm = ResourceManager.Instance;
 
-        lc.Init();
+        lc.Init(pc);
 
         // Map
         GameObject level = Instantiate(rm.GetPrefab(Const.Prefabs_Levels, lc.Level.Level));
@@ -21,9 +21,6 @@ public class LevelTigger : MonoBehaviour
         lc.transform.LookAt(new Vector3(0, player.transform.position.y, 1));
 
         // goalPoint
-
-        // Pen
-        pc.Pen.Init(lc);
 
         // Ball
         Ball ball = Instantiate(rm.GetPrefab<Ball>(Const.Prefabs_Ball), level.transform.position + lc.Level.BallOffset, Quaternion.identity);
