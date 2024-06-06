@@ -15,6 +15,8 @@ public class Board : MonoBehaviour
 
     private bool _isFinished => _line.loop;
 
+    private Vector3 _normal;
+
 
     private void Awake()
     {
@@ -74,6 +76,8 @@ public class Board : MonoBehaviour
         _line.loop = true;
         _inputBox.SetActive(false);
 
+        _normal = transform.forward;
+
         Mesh mesh = new Mesh();
         _line.BakeMesh(mesh, true); // Camera.main => Origin.Camera, Error Check... distance = 0.1f ... Error Mesh Overlap
         transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
@@ -99,8 +103,7 @@ public class Board : MonoBehaviour
                     break;
                 case Palette.Blue:
                     vel = ball.Rigidbody.velocity;
-                    Vector3 nor = transform.forward;
-                    ball.Rigidbody.velocity = Vector3.Reflect(vel, nor) * 0.7f;
+                    ball.Rigidbody.velocity = Vector3.Reflect(vel, _normal);
                     break;
                 case Palette.LightGreen:
                     //in

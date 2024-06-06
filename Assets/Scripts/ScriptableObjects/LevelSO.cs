@@ -9,12 +9,10 @@ public class LevelSO : ScriptableObject
     [SerializeField] private Vector3 _playerOffset;
     [SerializeField] private Vector3 _ballOffset;
     [SerializeField] private Vector3 _goalOffset;
-    [SerializeField] private Vector3 _tableOffset;
 
     public int Level => _level;
     public List<Palette> UseablePens => _usablePens;
     public Vector3 PlayerOffset => _playerOffset;
     public Vector3 BallOffset => _ballOffset;
     public Vector3 GoalOffset => _goalOffset;
-    public Vector3 TableOffset => _tableOffset;
 }
