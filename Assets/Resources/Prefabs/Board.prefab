@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4579c3997b89f9b469c737fc7d0015f0, type: 2}
+  - {fileID: 2100000, guid: bfc891fd0b9d43f45bc1da5d4319a4ad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 503070207555628020}
   - component: {fileID: 8938314339386958219}
+  - component: {fileID: 3122883885402465869}
   m_Layer: 6
   m_Name: Board
   m_TagString: Untagged
@@ -150,5 +151,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca8c5a63b7af86a4bba7d18e7ea0b29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseMaterial: {fileID: 2100000, guid: 9d16e0ed78e9cb7468103f215590d99e, type: 2}
+  _baseMaterial: {fileID: 2100000, guid: 65e92f9e270bf96429269bad09476dc4, type: 2}
   _inputBox: {fileID: 567498431262222344}
+  _collider: {fileID: 3122883885402465869}
+--- !u!64 &3122883885402465869
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800273519687189823}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}

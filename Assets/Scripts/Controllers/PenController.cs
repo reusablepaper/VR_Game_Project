@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class PenController : MonoBehaviour
 {
@@ -9,6 +8,6 @@ public class PenController : MonoBehaviour
     public void Init(PlayerController player)
     {
         Pen = Instantiate(ResourceManager.Instance.GetPrefab<Pen>(Const.Prefabs_Pen), player.LeftHand.transform);
-        Pen.Init(player.LevelController);
+        Pen.Init(player.LevelController, player.LeftHand.GetComponent<LeftHandController>());
     }
 }
