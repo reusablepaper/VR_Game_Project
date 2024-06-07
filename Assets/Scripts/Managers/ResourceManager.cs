@@ -20,6 +20,7 @@ public class ResourceManager : MonoBehaviour
 
     private Dictionary<string, GameObject> _prefabs;
     private Dictionary<string, ScriptableObject> _scriptableObjects;
+    private Dictionary<string, Sprite> _sprites;
 
     public void Flush()
     {
@@ -87,5 +88,21 @@ public class ResourceManager : MonoBehaviour
     public T GetSO<T>(string path, int id) where T : ScriptableObject
     {
         return GetSO<T>(Path.Combine(path, id.ToString("000")));
+    }
+
+    public Sprite GetSprite(string path)
+    {
+        if (_sprites == null) _sprites = new();
+
+        if (!_sprites.TryGetValue(path, out Sprite sprite))
+        {
+            sprite = Resources.Load<Sprite>(path);
+            if (sprite != null)
+            {
+                _sprites.Add(path, sprite);
+            }
+        }
+
+        return sprite;
     }
 }

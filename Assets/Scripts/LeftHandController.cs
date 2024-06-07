@@ -9,13 +9,16 @@ public class LeftHandController : MonoBehaviour
 
     public MenuUI MenuUI { get; private set; }
 
+
     public UnityEvent OnClickEvent;
- 
+    public bool _isUIOpenable;
+
     public void Init(PlayerController player)
     {
         MenuUI = Instantiate(ResourceManager.Instance.GetPrefab<MenuUI>(Const.Prefabs_UIs_MenuUI), player.LeftHand.transform);
         MenuUI.Init(player.LevelController, player.SceneController, player.PenController);
-      
+
+        _isUIOpenable = false;
 
         OnClickEvent = new();
 
@@ -24,14 +27,21 @@ public class LeftHandController : MonoBehaviour
 
         _openUIReference.action.performed += (InputAction.CallbackContext a) =>
         {
-            bool isUIActive = MenuUI.gameObject.activeSelf;
-            if (!player.SceneController.isLobby())
+
+            if (_isUIOpenable)
             {
+                bool isUIActive = MenuUI.gameObject.activeSelf;
+
                 MenuUI.gameObject.SetActive(!isUIActive);
                 _rightHandUIRay.SetActive(!isUIActive);
 
                 OnClickEvent.Invoke();
             }
         };
+    }
+
+    public void SetUIOpenable(bool isUIOpenable)
+    {
+        _isUIOpenable = isUIOpenable;
     }
 }
