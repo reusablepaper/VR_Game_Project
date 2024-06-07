@@ -27,16 +27,17 @@ public class MenuUI : MonoBehaviour
         _pc = pc;
         _effect = GetComponent<ButtonEffect>();
 
-        //Åä±Û¹öÆ°ÀÇ ¸ð¾ç ÃÊ±âÈ­½ÃÄÑÁÜ
+        //ï¿½ï¿½Û¹ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         SetWall(_isTransparent);
 
-        //½ÃÀÛ¹öÆ°ÀÇ ¸ð¾ç ÃÊ±âÈ­ ½ÃÄÑÁÜ
+        //ï¿½ï¿½ï¿½Û¹ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Image image = _startButton.GetComponent<Image>();
         image.sprite = Resources.Load<Sprite>(Const.Image_Images_Start);
 
         _leftButton.onClick.AddListener(() =>
         {
             _effect.PlayEffect(_leftButton);
+            SoundManager.Instance.PlaySFX(SFX.Button);
             _pc.prevColor();
 
         });
@@ -44,15 +45,17 @@ public class MenuUI : MonoBehaviour
         _rightButton.onClick.AddListener(() =>
         {
             _effect.PlayEffect(_rightButton);
+            SoundManager.Instance.PlaySFX(SFX.Button);
             _pc.nextColor();
         });
 
         _startButton.onClick.AddListener(() =>
         {
             _effect.PlayEffect(_startButton);
+            SoundManager.Instance.PlaySFX(SFX.Button);
 
-            //½ÃÀÛ¹öÆ° ´©¸¦½Ã º®Àº Åõ¸íÀÌ ÄÑÁö°ÔµÊ
-            _isTransparent= true;
+            //ï¿½ï¿½ï¿½Û¹ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ôµï¿½
+            _isTransparent = true;
             SetWall(_isTransparent);
 
             if (_hasStarted)
@@ -63,7 +66,7 @@ public class MenuUI : MonoBehaviour
             }
 
             else
-            {           //½ÃÀÛ¹öÆ° ´©¸¦½Ã ½ÃÀÛ¹öÆ°ÀÇ ÀÌ¹ÌÁö¸¦ redoÀÌ¹ÌÁö·Î º¯°æ
+            {           //ï¿½ï¿½ï¿½Û¹ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û¹ï¿½Æ°ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ redoï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 _startButton.image.sprite = ResourceManager.Instance.GetSprite(Const.Image_Images_Redo);
                 _lc.SetState(LevelState.Playing);
                 _lc.TryCount++;
@@ -74,6 +77,7 @@ public class MenuUI : MonoBehaviour
 
         _lobbyButton.onClick.AddListener(() =>
         {
+            SoundManager.Instance.PlaySFX(SFX.Button);
             _effect.PlayEffect(_lobbyButton);
 
 
@@ -83,6 +87,7 @@ public class MenuUI : MonoBehaviour
 
         _toggleButton.onClick.AddListener(() =>
         {
+            SoundManager.Instance.PlaySFX(SFX.Button);
             _effect.PlayEffect(_toggleButton);
 
             _isTransparent = !_isTransparent;
@@ -94,12 +99,14 @@ public class MenuUI : MonoBehaviour
         _penInfoButton.onClick.AddListener(() =>
         {
             _effect.PlayEffect(_penInfoButton);
+            SoundManager.Instance.PlaySFX(SFX.Button);
             _pc.Pen.gameObject.SetActive(false);
         });
 
         _backButton.onClick.AddListener(() =>
         {
             _effect.PlayEffect(_backButton);
+            SoundManager.Instance.PlaySFX(SFX.Button);
             _pc.Pen.gameObject.SetActive(true);
         });
 
@@ -127,10 +134,10 @@ public class MenuUI : MonoBehaviour
     {
         if (material == null) return;
 
-        // Åõ¸í »ö»ó ¼³Á¤
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         material.color = new Color(0.0f, 1.0f, 1.0f, 0.3f);
 
-        // Åõ¸í ¸ðµå ¼³Á¤
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         material.SetFloat("_Mode", 3);
         material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
         material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
@@ -145,10 +152,10 @@ public class MenuUI : MonoBehaviour
     {
         if (material == null) return;
 
-        // ºÒÅõ¸í »ö»ó ¼³Á¤
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         material.color = new Color(238 / 255f, 235 / 255f, 175 / 255f);
 
-        // ºÒÅõ¸í ¸ðµå ¼³Á¤
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         material.SetFloat("_Mode", 0);
         material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
         material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);

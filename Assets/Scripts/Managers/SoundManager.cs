@@ -31,6 +31,7 @@ public class SoundManager : MonoBehaviour
     void Awake()
     {
         Init();
+        
     }
 
     void Init()
@@ -70,8 +71,10 @@ public class SoundManager : MonoBehaviour
             _bgmPlayer.Stop();
     }
 
-    public void PlaySFX(AudioClip sfxClip)
+    public void PlaySFX(SFX sfx)
     {
+        AudioClip sfxClip = ResourceManager.Instance.GetAudioClip(sfx);
+
         for (int i = 0; i < _sfxChannels; i++)
         {
             int loopIndex = (i + _sfxIndex) % _sfxChannels;

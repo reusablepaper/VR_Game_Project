@@ -36,6 +36,7 @@ public class Pen : MonoBehaviour
             if (!_isGrabed)
             {
                 gameObject.SetActive(leftHandController.MenuUI.gameObject.activeSelf);
+
             }
         });
 
@@ -43,6 +44,7 @@ public class Pen : MonoBehaviour
 
         XRGrabInteractable _grab = GetComponent<XRGrabInteractable>();
         _grab.selectEntered.AddListener((SelectEnterEventArgs args) => { _isGrabed = true; });
+        SoundManager.Instance.PlaySFX(SFX.GrabPen);
         _grab.selectExited.AddListener((SelectExitEventArgs args) =>
         {
             _isGrabed = false;
@@ -53,6 +55,7 @@ public class Pen : MonoBehaviour
             _isGrabed = true;
             _levelContoller.BoardSpawner.SpawnBoard();
             StartCoroutine(nameof(RaycastForDrawing));
+           
         });
         _grab.deactivated.AddListener((DeactivateEventArgs args) =>
         {
