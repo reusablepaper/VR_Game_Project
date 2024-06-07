@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class LevelController : MonoBehaviour
 {
@@ -35,6 +37,8 @@ public class LevelController : MonoBehaviour
             PlayerPrefs.SetInt("Level", Level.Level + 1);
             _resultUI.gameObject.SetActive(true);
         });
+        Subscribe(LevelState.PrePlaying, () => player.RightMenuAction.action.performed += (InputAction.CallbackContext a) => { _boardSpawner.RemoveAllBoards(); });
+        Subscribe(LevelState.None, () => player.RightMenuAction.action.performed -= (InputAction.CallbackContext a) => { _boardSpawner.RemoveAllBoards(); });
     }
 
     public void SetState(LevelState levelState)

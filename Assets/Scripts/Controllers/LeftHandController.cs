@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class LeftHandController : MonoBehaviour
 {
     [SerializeField] private GameObject _rightHandUIRay;
-    [SerializeField] private InputActionReference _openUIReference;
 
     public MenuUI MenuUI { get; private set; }
 
@@ -24,7 +23,7 @@ public class LeftHandController : MonoBehaviour
         MenuUI.gameObject.SetActive(false);
         _rightHandUIRay.SetActive(false);
 
-        _openUIReference.action.performed += (InputAction.CallbackContext a) =>
+        player.LeftMenuAction.action.performed += (InputAction.CallbackContext a) =>
         {
 
             if (_isUIOpenable)

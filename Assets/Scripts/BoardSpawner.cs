@@ -52,4 +52,12 @@ public class BoardSpawner : MonoBehaviour
 
         board.Init(_penController);
     }
+
+    public void RemoveAllBoards()
+    {
+        foreach (var board in _boards)
+        {
+            board.gameObject.SetActive(false);
+        }
+    }
 }
