@@ -36,7 +36,6 @@ public class Pen : MonoBehaviour
             if (!_isGrabed)
             {
                 gameObject.SetActive(leftHandController.MenuUI.gameObject.activeSelf);
-
             }
         });
 
@@ -55,7 +54,8 @@ public class Pen : MonoBehaviour
             _isGrabed = true;
             _levelContoller.BoardSpawner.SpawnBoard();
             StartCoroutine(nameof(RaycastForDrawing));
-           
+            SoundManager.Instance.PlaySFX(SFX.Pen);
+
         });
         _grab.deactivated.AddListener((DeactivateEventArgs args) =>
         {

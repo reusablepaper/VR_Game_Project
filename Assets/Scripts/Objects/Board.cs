@@ -63,7 +63,6 @@ public class Board : MonoBehaviour
         if(_line.positionCount == 0 || (_line.GetPosition(_line.positionCount - 1) - pos).magnitude > _minDistance)
         {
             _line.SetPosition(_line.positionCount++, pos);
-            SoundManager.Instance.PlaySFX(SFX.Pen);
         }
 
         if (_line.positionCount == _inkCount) Finish();
