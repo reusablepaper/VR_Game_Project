@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,12 +16,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera _mainCamera;
     public Camera MainCamera => _mainCamera;
 
+    public InputActionReference LeftMenuAction;
+    public InputActionReference RightMenuAction;
+
     private void Awake()
     {
         LevelController = Util.GetOrAddComponent<LevelController>(gameObject);
         SceneController = Util.GetOrAddComponent<SceneController>(gameObject);
         PenController = Util.GetOrAddComponent<PenController>(gameObject);
     }
-
-
 }

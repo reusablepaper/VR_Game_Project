@@ -107,12 +107,6 @@ public class Board : MonoBehaviour
                     vel = ball.Rigidbody.velocity;
                     ball.Rigidbody.velocity = Vector3.Reflect(vel, _normal);
                     break;
-                case Palette.LightGreen:
-                    //in
-                    break;
-                case Palette.Green:
-                    //out
-                    break;
                 case Palette.Yellow:
                     vel = ball.Rigidbody.velocity;
                     ball.Rigidbody.velocity = vel * 1.5f;
@@ -120,9 +114,6 @@ public class Board : MonoBehaviour
                 case Palette.Orange:
                     vel = ball.Rigidbody.velocity;
                     ball.Rigidbody.velocity = vel * 0.5f;
-                    break;
-                case Palette.Gray:
-                    SetColor(Palette.Black);
                     break;
             }
         }

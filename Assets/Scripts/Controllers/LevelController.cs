@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class LevelController : MonoBehaviour
 {
@@ -12,13 +14,16 @@ public class LevelController : MonoBehaviour
     private LevelState _state;
     private Dictionary<LevelState, UnityEvent> _entries = new();
 
-    public void Init(PenController pc)
+    public void Init(PlayerController player)
     {
         _boardSpawner = new GameObject("Board Spawner").AddComponent<BoardSpawner>();
-        _boardSpawner.Init(pc);
+        _boardSpawner.Init(player.PenController);
         _entries.Clear();
 
         Subscribe(LevelState.Success, () => PlayerPrefs.SetInt("Level", Level.Level + 1));
+
+        Subscribe(LevelState.PrePlaying, () => player.RightMenuAction.action.performed += (InputAction.CallbackContext a) => { _boardSpawner.RemoveAllBoards(); });
+        Subscribe(LevelState.None, () => player.RightMenuAction.action.performed -= (InputAction.CallbackContext a) => { _boardSpawner.RemoveAllBoards(); });
     }
 
     public void SetState(LevelState levelState)
