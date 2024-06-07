@@ -5,7 +5,23 @@ public class BoardSpawner : MonoBehaviour
 {
     private List<Board> _boards;
     private PenController _penController;
-
+    public int BoardCount
+    {
+        get
+        {
+            int cnt = 0;
+            foreach (Board board in _boards)
+            {
+                
+                if(board.gameObject.activeSelf)
+                {
+                    cnt++;
+                }
+                
+            }
+            return cnt;
+        }
+    }
 
     public void Init(PenController pc)
     {

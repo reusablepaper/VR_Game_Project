@@ -13,7 +13,7 @@ public class LobbyTrigger : MonoBehaviour
         player.gameObject.transform.position = Vector3.zero;
 
         leftHand.SetUIOpenable(false);
-        leftHand.MenuUI.gameObject.SetActive(false);
+        leftHand.OnEnterLobby(); 
         player.PenController.Pen.gameObject.SetActive(false);
     }
 }

@@ -11,7 +11,7 @@ public class LevelTigger : MonoBehaviour
 
         ResourceManager rm = ResourceManager.Instance;
 
-        lc.Init(pc);
+        lc.Init(player);
 
         // Map
         GameObject level = Instantiate(rm.GetPrefab(Const.Prefabs_Levels, lc.Level.Level));

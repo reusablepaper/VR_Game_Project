@@ -43,4 +43,9 @@ public class LeftHandController : MonoBehaviour
     {
         _isUIOpenable = isUIOpenable;
     }
+    public void OnEnterLobby()
+    {
+        MenuUI.gameObject.SetActive (false);
+        _rightHandUIRay.SetActive(false); 
+    }
 }

@@ -10,6 +10,7 @@ public class MenuUI : MonoBehaviour
     [SerializeField] private Button _toggleButton;
     [SerializeField] private Button _penInfoButton;
     [SerializeField] private Button _backButton;
+
     private LevelController _lc;
     private SceneController _sc;
     private PenController _pc;
@@ -25,7 +26,13 @@ public class MenuUI : MonoBehaviour
         _sc = sc;
         _pc = pc;
         _effect = GetComponent<ButtonEffect>();
+
+        //토글버튼의 모양 초기화시켜줌
         SetWall(_isTransparent);
+
+        //시작버튼의 모양 초기화 시켜줌
+        Image image = _startButton.GetComponent<Image>();
+        image.sprite = Resources.Load<Sprite>(Const.Image_Images_Start);
 
         _leftButton.onClick.AddListener(() =>
         {
@@ -59,6 +66,7 @@ public class MenuUI : MonoBehaviour
             {           //시작버튼 누를시 시작버튼의 이미지를 redo이미지로 변경
                 _startButton.image.sprite = ResourceManager.Instance.GetSprite(Const.Image_Images_Redo);
                 _lc.SetState(LevelState.Playing);
+                _lc.TryCount++;
             }
             _hasStarted = !_hasStarted;
   
@@ -68,13 +76,6 @@ public class MenuUI : MonoBehaviour
         {
             _effect.PlayEffect(_lobbyButton);
 
-            //로비로 돌아갈 경우 벽의 투명이 꺼짐
-            _isTransparent = false;
-            SetWall(_isTransparent);
-            
-            //로비로 돌아갈 경우 시작 버튼의 모양을 다시 초기화 시켜준다
-            Image image = _startButton.GetComponent<Image>();
-            image.sprite = Resources.Load<Sprite>(Const.Image_Images_Start);
 
             _lc.SetState(LevelState.None);
             _sc.ChangeScene(Const.LobbyScene);
@@ -92,11 +93,13 @@ public class MenuUI : MonoBehaviour
 
         _penInfoButton.onClick.AddListener(() =>
         {
+            _effect.PlayEffect(_penInfoButton);
             _pc.Pen.gameObject.SetActive(false);
         });
 
         _backButton.onClick.AddListener(() =>
         {
+            _effect.PlayEffect(_backButton);
             _pc.Pen.gameObject.SetActive(true);
         });
 
