@@ -33,7 +33,7 @@ public class Board : MonoBehaviour
 
     public void Init(PenController pc)
     {
-        transform.position = pc.Pen.transform.position + pc.Pen.transform.forward * 0.2f;
+        transform.position = pc.Pen.transform.position + pc.Pen.transform.forward * 0.3f;
         transform.LookAt(pc.Pen.transform);
 
         XRGrabInteractable penGrab = pc.Pen.GetComponent<XRGrabInteractable>();
@@ -97,8 +97,9 @@ public class Board : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out Ball ball)) {
+        if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Ball"))) {
             Vector3 vel;
+            Rigidbody rigid = other.GetComponent<Rigidbody>();
 
             switch (_color)
             {
@@ -107,26 +108,26 @@ public class Board : MonoBehaviour
                     SoundManager.Instance.PlaySFX(SFX.General);
                     break;
                 case Palette.Blue:
-                    vel = ball.Rigidbody.velocity;
-                    ball.Rigidbody.velocity = Vector3.Reflect(vel, _normal);
+                    vel = rigid.velocity;
+                    rigid.velocity = Vector3.Reflect(vel, _normal);
                     SoundManager.Instance.PlaySFX(SFX.Elasticity);
                     break;
                 case Palette.LightGreen:
-                    ball.transform.localScale = ball.transform.localScale * 0.8f;
+                    other.transform.localScale = other.transform.localScale * 0.8f;
                     SoundManager.Instance.PlaySFX(SFX.Teleport);
                     break;
                 case Palette.Green:
-                    ball.transform.localScale = ball.transform.localScale * 1.2f;
+                    other.transform.localScale = other.transform.localScale * 1.2f;
                     SoundManager.Instance.PlaySFX(SFX.Teleport);
                     break;
                 case Palette.Yellow:
-                    vel = ball.Rigidbody.velocity;
-                    ball.Rigidbody.velocity = vel * 1.5f;
+                    vel = rigid.velocity;
+                    rigid.velocity = vel * 1.5f;
                     SoundManager.Instance.PlaySFX(SFX.Fast);
                     break;
                 case Palette.Orange:
-                    vel = ball.Rigidbody.velocity;
-                    ball.Rigidbody.velocity = vel * 0.5f;
+                    vel = rigid.velocity;
+                    rigid.velocity = vel * 0.5f;
                     SoundManager.Instance.PlaySFX(SFX.Slow);
                     break;
             }

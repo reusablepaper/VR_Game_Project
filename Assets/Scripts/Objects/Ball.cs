@@ -3,8 +3,8 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Ball : MonoBehaviour
-{   
-    public Rigidbody Rigidbody { get; private set; }
+{
+    private Rigidbody _rigidbody;
     
     private Vector3 _initPosition;
 
@@ -19,7 +19,7 @@ public class Ball : MonoBehaviour
 
     private void Awake()
     {
-        Rigidbody = Util.GetOrAddComponent<Rigidbody>(gameObject);
+        _rigidbody = Util.GetOrAddComponent<Rigidbody>(gameObject);
     }
 
     public void Init(LevelController lc)
@@ -27,22 +27,24 @@ public class Ball : MonoBehaviour
         _initPosition = transform.position;
 
         _preview = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        _preview.layer = 1 << LayerMask.NameToLayer("Ball");
+        _preview.layer = LayerMask.NameToLayer("Ball");
         _previewRigid = _preview.AddComponent<Rigidbody>();
 
         lc.Subscribe(LevelState.PrePlaying, () => {
-            Rigidbody.useGravity = false;
-            Rigidbody.velocity = Vector3.zero;
+            _rigidbody.useGravity = false;
+            _rigidbody.velocity = Vector3.zero;
             transform.position = _initPosition;
             _hasMoved = false;
 
+            _preview.SetActive(true);
             StartCoroutine(nameof(PreviewRoutine));
         });
 
         lc.Subscribe(LevelState.Playing, () => {
-            Rigidbody.useGravity = true;
+            _rigidbody.useGravity = true;
 
             StopCoroutine(nameof(PreviewRoutine));
+            _preview.SetActive(false);
         });
 
         lc.Subscribe(LevelState.None, () => {
@@ -65,13 +67,13 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if(_hasMoved && Rigidbody.velocity.magnitude < 0.01f)
+        if(_hasMoved && _rigidbody.velocity.magnitude < 0.01f)
         {
             _explosion.Play();
 
             _onStop.Invoke();
         }
-        else if(!_hasMoved && Rigidbody.velocity.magnitude > 0.01f)
+        else if(!_hasMoved && _rigidbody.velocity.magnitude > 0.01f)
         {
             _hasMoved = true;
         }

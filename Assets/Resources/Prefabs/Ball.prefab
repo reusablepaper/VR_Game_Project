@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5563430553512117340}
   - component: {fileID: 6388457608569210294}
   - component: {fileID: 1337142622842723784}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ExplosionEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4752,7 +4752,7 @@ GameObject:
   - component: {fileID: 4664576886323994484}
   - component: {fileID: 6649983054313346566}
   - component: {fileID: 5561136237695620191}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9652,9 +9652,9 @@ GameObject:
   - component: {fileID: 6886658633217365969}
   - component: {fileID: 3753619492527895908}
   - component: {fileID: -3976277090654130252}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9722,7 +9722,7 @@ GameObject:
   - component: {fileID: 8047323850519363235}
   - component: {fileID: 4228112443068440135}
   - component: {fileID: 1053630376065974632}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9805,7 +9805,7 @@ GameObject:
   - component: {fileID: 9029699451917342869}
   - component: {fileID: 761274071613203345}
   - component: {fileID: 1552553498647540538}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Embers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14579,7 +14579,7 @@ GameObject:
   - component: {fileID: 2325768872443963605}
   - component: {fileID: 8267924411971525352}
   - component: {fileID: 1392928707018233784}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: spark3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19708,7 +19708,7 @@ GameObject:
   - component: {fileID: 4383233091952104168}
   - component: {fileID: 1678074947956106318}
   - component: {fileID: 2726826271392217547}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sparkle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24547,7 +24547,7 @@ GameObject:
   - component: {fileID: 8363109983771387232}
   - component: {fileID: 2345190575420284143}
   - component: {fileID: 2549754252968720018}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29370,7 +29370,7 @@ GameObject:
   - component: {fileID: 7783172279041836006}
   - component: {fileID: 5227726982507712050}
   - component: {fileID: 6369003410956168642}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34207,7 +34207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1098974279667135945}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34244,7 +34244,7 @@ GameObject:
   - component: {fileID: 8673822332876073488}
   - component: {fileID: 2880061837185079585}
   - component: {fileID: 6058445943386173892}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: spark2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

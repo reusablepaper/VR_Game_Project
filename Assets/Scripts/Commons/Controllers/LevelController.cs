@@ -43,6 +43,7 @@ public class LevelController : MonoBehaviour
 
         Subscribe(LevelState.Fail, () =>
         {
+            _resultUI.gameObject.SetActive(true);
             SoundManager.Instance.PlaySFX(SFX.Fail);
         });
     }
