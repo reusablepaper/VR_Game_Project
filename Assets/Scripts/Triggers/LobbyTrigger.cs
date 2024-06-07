@@ -10,7 +10,7 @@ public class LobbyTrigger : MonoBehaviour
 
         Instantiate(ResourceManager.Instance.GetPrefab(Const.Prefabs_Lobby));
 
-        player.gameObject.transform.position = Vector3.zero;
+        player.MainCamera.transform.position = Vector3.zero;
 
         leftHand.SetUIOpenable(false);
         leftHand.OnEnterLobby(); 
