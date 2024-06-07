@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour
 
 
     [Header("SFX")]
-    private float _sfxVolume;
+    private float _sfxVolume = 50;
     private int _sfxChannels = 10;
     private int _sfxIndex;
     private AudioSource[] _sfxPlayers;
