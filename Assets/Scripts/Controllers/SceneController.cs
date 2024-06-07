@@ -14,6 +14,8 @@ public class SceneController : MonoBehaviour
     private Material _faderMaterial;
     private bool _isLobby;
 
+    private WaitForSeconds _fadeTerm = new WaitForSeconds(0.05f);
+
     public void Init(PlayerController player)
     {
         _fadeInEvent = new();
@@ -49,11 +51,11 @@ public class SceneController : MonoBehaviour
 
         Material fadeMaterial = _faderScreenRenderer.material;
 
-        while (fadeMaterial.color.a < 0.999f)
+        while (fadeMaterial.color.a < 0.99f)
         {
-            fadeMaterial.color = new Color(0, 0, 0, fadeMaterial.color.a + 0.01f);
+            fadeMaterial.color = new Color(0, 0, 0, fadeMaterial.color.a + 0.05f);
 
-            yield return null;
+            yield return _fadeTerm;
         }
 
         ResourceManager.Instance.Flush();
@@ -65,11 +67,11 @@ public class SceneController : MonoBehaviour
             yield return null;
         }
 
-        while (fadeMaterial.color.a > 0.001f)
+        while (fadeMaterial.color.a > 0.01f)
         {
-            fadeMaterial.color = new Color(0, 0, 0, fadeMaterial.color.a - 0.01f);
+            fadeMaterial.color = new Color(0, 0, 0, fadeMaterial.color.a - 0.05f);
 
-            yield return null;
+            yield return _fadeTerm;
         }
 
         _faderScreenRenderer.gameObject.SetActive(false);

@@ -33,7 +33,7 @@ public class Board : MonoBehaviour
 
     public void Init(PenController pc)
     {
-        transform.position = pc.Pen.transform.position + pc.Pen.transform.forward * 0.3f;
+        transform.position = pc.Pen.transform.position + pc.Pen.transform.forward * 0.1f;
         transform.LookAt(pc.Pen.transform);
 
         pc.Pen.GetComponent<XRGrabInteractable>().deactivated.AddListener((DeactivateEventArgs args) => Finish());
