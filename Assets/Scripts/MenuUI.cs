@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,83 +13,140 @@ public class MenuUI : MonoBehaviour
     [SerializeField] private Button _lobbyButton;
     [SerializeField] private Button _toggleButton;
 
+
     private LevelController _lc;
     private SceneController _sc;
     private PenController _pc;
-    private int _index;
-    private bool _isTransparent=true;
+    private bool _isTransparent = false;
+
+    private ButtonEffect _effect;
 
     public void Init(LevelController lc, SceneController sc, PenController pc)
     {
         _lc = lc;
         _sc = sc;
         _pc = pc;
+        _effect = GetComponent<ButtonEffect>();
+        SetWall(_isTransparent);
 
-
-        Material toggleWallMat = Resources.Load<Material>(Const.Materails_ToggleWallMat);
-
-        _leftButton.onClick.AddListener(() =>
+    _leftButton.onClick.AddListener(() =>
         {
+            _effect.PlayEffect(_leftButton);
             _pc.prevColor();
 
         });
 
         _rightButton.onClick.AddListener(() =>
         {
+            _effect.PlayEffect(_rightButton);
             _pc.nextColor();
         });
 
         _startButton.onClick.AddListener(() =>
         {
-            _isTransparent = true;
-            setMaterialTransparent(toggleWallMat);
+            _effect.PlayEffect(_startButton);
+
+            //시작버튼 누를시 시작버튼의 이미지를 redo이미지로 변경
+            Image image = _startButton.GetComponent<Image>();
+            image.sprite = Resources.Load<Sprite>(Const.Image_Images_Redo);
+
+            //시작버튼 누를시 벽은 투명이 켜지게됨
+            _isTransparent= true;
+            SetWall(_isTransparent);
+
             _lc.SetState(LevelState.Playing);
+
+
 
         });
 
         _lobbyButton.onClick.AddListener(() =>
         {
+            _effect.PlayEffect(_lobbyButton);
+
+            //로비로 돌아갈 경우 벽의 투명이 꺼짐
             _isTransparent = false;
-            setMeterialOpaque(toggleWallMat); 
+            SetWall(_isTransparent);
+            
+            //로비로 돌아갈 경우 시작 버튼의 모양을 다시 초기화 시켜준다
+            Image image = _startButton.GetComponent<Image>();
+            image.sprite = Resources.Load<Sprite>(Const.Image_Images_Start);
+
+            gameObject.SetActive(false);
             _lc.SetState(LevelState.Fail);
             _sc.ChangeScene(Const.LobbyScene);
+            //유아이 켠채로 메인로비 돌아갈시 펜이 사라지지 않는 버그가 잇습니둥
+
         });
 
         _toggleButton.onClick.AddListener(() =>
         {
-   
-            _isTransparent = !_isTransparent; 
+            _effect.PlayEffect(_toggleButton);
 
-            RectTransform buttonRectTransform = _toggleButton.GetComponent<RectTransform>();
-            Vector3 currentScale = buttonRectTransform.localScale;
-            currentScale.x = -currentScale.x;
-            buttonRectTransform.localScale = currentScale;
+            _isTransparent = !_isTransparent;
 
-            if(toggleWallMat != null)
-            { 
-                if (_isTransparent)
-                {
-                    setMeterialOpaque(toggleWallMat);
-                }
-                else
-                {
-                    setMaterialTransparent(toggleWallMat);
-                }
-                
-            }
-        });
+            SetWall(_isTransparent);
+
+         });
+
 
     }
-    private void setMaterialTransparent(Material meterial)
+
+    private void SetWall(bool isTransparent)
     {
-        meterial.color = new Color(0.0f, 1.0f, 1.0f, 0.3f); //toggle wall color
-        meterial.SetFloat("_Mode", 3); // Unity Standard Shader의 경우 3은 Transparent 모드
+        Material _toggleWallMat = Resources.Load<Material>(Const.Materials_ToggleWallMat); //리소스 매니저 안쓰는데 이거 맞나요???   
+        Image image = _toggleButton.GetComponent<Image>();//현재 이미지를 갖고옴
+
+        if (isTransparent)
+        {
+            image.sprite = Resources.Load<Sprite>(Const.Image_Images_SwitchOff);
+            SetMaterialTransparent(_toggleWallMat);
+        }
+        else
+        {
+            image.sprite= Resources.Load<Sprite>(Const.Image_Images_SwitchOn);
+            SetMaterialOpaque(_toggleWallMat);
+        }
+ 
+       
     }
-    private void setMeterialOpaque(Material meterial)
+
+    private void SetMaterialTransparent(Material material)
     {
-        meterial.color = new Color(238 / 255f, 235 / 255f, 175 / 255f); //일반 벽 color
-        meterial.SetFloat("_Mode", 0);
+        if (material == null) return;
+
+        // 투명 색상 설정
+        material.color = new Color(0.0f, 1.0f, 1.0f, 0.3f);
+
+        // 투명 모드 설정
+        material.SetFloat("_Mode", 3);
+        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        material.SetInt("_ZWrite", 0);
+        material.DisableKeyword("_ALPHATEST_ON");
+        material.EnableKeyword("_ALPHABLEND_ON");
+        material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
     }
+
+    private void SetMaterialOpaque(Material material)
+    {
+        if (material == null) return;
+
+        // 불투명 색상 설정
+        material.color = new Color(238 / 255f, 235 / 255f, 175 / 255f);
+
+        // 불투명 모드 설정
+        material.SetFloat("_Mode", 0);
+        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+        material.SetInt("_ZWrite", 1);
+        material.DisableKeyword("_ALPHATEST_ON");
+        material.DisableKeyword("_ALPHABLEND_ON");
+        material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Geometry;
+    }
+
 
 }
 

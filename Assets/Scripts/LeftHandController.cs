@@ -8,6 +8,7 @@ public class LeftHandController : MonoBehaviour
     [SerializeField] private InputActionReference _openUIReference;
 
     public MenuUI MenuUI { get; private set; }
+ 
 
     public UnityEvent OnClickEvent;
  
@@ -15,7 +16,7 @@ public class LeftHandController : MonoBehaviour
     {
         MenuUI = Instantiate(ResourceManager.Instance.GetPrefab<MenuUI>(Const.Prefabs_UIs_MenuUI), player.LeftHand.transform);
         MenuUI.Init(player.LevelController, player.SceneController, player.PenController);
-      
+ 
 
         OnClickEvent = new();
 
