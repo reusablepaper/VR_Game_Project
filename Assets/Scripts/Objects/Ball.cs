@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
     private void Awake()
     {
         Rigidbody = Util.GetOrAddComponent<Rigidbody>(gameObject);
+        Util.GetOrAddComponent<SphereCollider>(gameObject);
     }
 
     public void Init(LevelController lc)
@@ -28,20 +29,6 @@ public class Ball : MonoBehaviour
         lc.Subscribe(LevelState.Playing, () => {
             Rigidbody.useGravity = true;
         });
-    }
-
-    private void Update()
-    {
-        // If the ball stops, keep calling the next callback function => trigger?
-        if (IsStop())
-        {
-            _levelController.SetState(LevelState.Fail);
-        }
-    }
-
-    private bool IsStop()
-    {
-        return Rigidbody.velocity.magnitude < 0.01f;
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -10,11 +10,12 @@ public class Door : MonoBehaviour
 
     private WaitForSeconds _sec = new WaitForSeconds(0.01f);
     private Coroutine _coroutine;
-
-    private int _playerLevel = 2;
+    private int _playerLevel;
 
     private void Awake()
     {
+        _playerLevel = PlayerPrefs.GetInt("Level");
+
         if (_playerLevel > GetLevel())
             _lamp.color = Util.GetColor(Palette.Green);
         else if (_playerLevel == GetLevel())

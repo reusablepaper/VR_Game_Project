@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
         LevelController = Util.GetOrAddComponent<LevelController>(gameObject);
         SceneController = Util.GetOrAddComponent<SceneController>(gameObject);
         PenController = Util.GetOrAddComponent<PenController>(gameObject);
-        //_level = PlayerPrefs.GetInt("Level");
     }
 
 
