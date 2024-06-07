@@ -36,7 +36,9 @@ public class Board : MonoBehaviour
         transform.position = pc.Pen.transform.position + pc.Pen.transform.forward * 0.1f;
         transform.LookAt(pc.Pen.transform);
 
-        pc.Pen.GetComponent<XRGrabInteractable>().deactivated.AddListener((DeactivateEventArgs args) => Finish());
+        XRGrabInteractable penGrab = pc.Pen.GetComponent<XRGrabInteractable>();
+        penGrab.deactivated.AddListener((DeactivateEventArgs args) => Finish());
+        penGrab.selectExited.AddListener((SelectExitEventArgs args) => Finish());
 
         _line.loop = false;
         _line.positionCount = 0;

@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class LevelController : MonoBehaviour
 {
-    public LevelSO Level { get; set; }
+    public LevelSO Level { get; private set; }
 
     public BoardSpawner BoardSpawner => _boardSpawner;
     private BoardSpawner _boardSpawner;
@@ -17,6 +17,8 @@ public class LevelController : MonoBehaviour
         _boardSpawner = new GameObject("Board Spawner").AddComponent<BoardSpawner>();
         _boardSpawner.Init(pc);
         _entries.Clear();
+
+        Subscribe(LevelState.Success, () => PlayerPrefs.SetInt("Level", Level.Level + 1));
     }
 
     public void SetState(LevelState levelState)
