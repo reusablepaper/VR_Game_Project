@@ -6,7 +6,6 @@ public class BoardSpawner : MonoBehaviour
     private List<Board> _boards;
     private PenController _penController;
 
-
     public void Init(PenController pc)
     {
         _penController = pc;
@@ -35,5 +34,13 @@ public class BoardSpawner : MonoBehaviour
         }
 
         board.Init(_penController);
+    }
+
+    public void RemoveAllBoards()
+    {
+        foreach (var board in _boards)
+        {
+            board.gameObject.SetActive(false);
+        }
     }
 }

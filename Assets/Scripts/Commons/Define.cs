@@ -4,6 +4,7 @@ public enum LevelState
     PrePlaying,
     Playing,
     Success,
+    Fail
 }
 
 public enum Palette
