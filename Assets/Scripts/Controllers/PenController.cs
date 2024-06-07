@@ -5,7 +5,7 @@ public class PenController : MonoBehaviour
 {
     public Pen Pen { get; private set; }
 
-    private int _penColor=0;
+    private int _penColor =0;
     private LevelController _levelController;
 
     public void Init(PlayerController player)
@@ -27,4 +27,8 @@ public class PenController : MonoBehaviour
         Pen.SetColor(_levelController.Level.UseablePens[_penColor % _levelController.Level.UseablePens.Count]);
     }
 
+    public void OnEnterLobby()
+    {
+        Pen.gameObject.SetActive(false);
+    }
 }

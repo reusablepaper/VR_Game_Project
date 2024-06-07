@@ -25,6 +25,7 @@ public class LevelTigger : MonoBehaviour
         Ball ball = Instantiate(rm.GetPrefab<Ball>(Const.Prefabs_Ball), level.transform.position + lc.Level.BallOffset, Quaternion.identity);
         ball.Init(lc);
 
+        player.LeftHand.GetComponent<LeftHandController>().SetUIOpenable(true);
         lc.SetState(LevelState.PrePlaying);
     }
 

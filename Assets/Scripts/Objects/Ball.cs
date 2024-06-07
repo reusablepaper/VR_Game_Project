@@ -25,7 +25,6 @@ public class Ball : MonoBehaviour
         });
 
         lc.Subscribe(LevelState.Playing, () => {
-            gameObject.transform.position = _initPosition;
             Rigidbody.useGravity = true;
         });
     }

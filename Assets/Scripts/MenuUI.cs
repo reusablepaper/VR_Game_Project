@@ -1,26 +1,24 @@
-using System;
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuUI : MonoBehaviour
 {
-
     [SerializeField] private Button _leftButton;
     [SerializeField] private Button _rightButton;
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _lobbyButton;
     [SerializeField] private Button _toggleButton;
-
-
+    [SerializeField] private Button _penInfoButton;
+    [SerializeField] private Button _backButton;
     private LevelController _lc;
     private SceneController _sc;
     private PenController _pc;
     private bool _isTransparent = false;
+    private bool _hasStarted = false;
 
     private ButtonEffect _effect;
-
+    private Material _toggleWallMat;
+    
     public void Init(LevelController lc, SceneController sc, PenController pc)
     {
         _lc = lc;
@@ -29,7 +27,7 @@ public class MenuUI : MonoBehaviour
         _effect = GetComponent<ButtonEffect>();
         SetWall(_isTransparent);
 
-    _leftButton.onClick.AddListener(() =>
+        _leftButton.onClick.AddListener(() =>
         {
             _effect.PlayEffect(_leftButton);
             _pc.prevColor();
@@ -46,18 +44,24 @@ public class MenuUI : MonoBehaviour
         {
             _effect.PlayEffect(_startButton);
 
-            //시작버튼 누를시 시작버튼의 이미지를 redo이미지로 변경
-            Image image = _startButton.GetComponent<Image>();
-            image.sprite = Resources.Load<Sprite>(Const.Image_Images_Redo);
-
             //시작버튼 누를시 벽은 투명이 켜지게됨
             _isTransparent= true;
             SetWall(_isTransparent);
 
-            _lc.SetState(LevelState.Playing);
+            if (_hasStarted)
+            {
+                
+                _startButton.image.sprite = ResourceManager.Instance.GetSprite(Const.Image_Images_Start);
+                _lc.SetState(LevelState.PrePlaying);
+            }
 
-
-
+            else
+            {           //시작버튼 누를시 시작버튼의 이미지를 redo이미지로 변경
+                _startButton.image.sprite = ResourceManager.Instance.GetSprite(Const.Image_Images_Redo);
+                _lc.SetState(LevelState.Playing);
+            }
+            _hasStarted = !_hasStarted;
+  
         });
 
         _lobbyButton.onClick.AddListener(() =>
@@ -72,11 +76,8 @@ public class MenuUI : MonoBehaviour
             Image image = _startButton.GetComponent<Image>();
             image.sprite = Resources.Load<Sprite>(Const.Image_Images_Start);
 
-            gameObject.SetActive(false);
-            _lc.SetState(LevelState.Fail);
+            _lc.SetState(LevelState.None);
             _sc.ChangeScene(Const.LobbyScene);
-            //유아이 켠채로 메인로비 돌아갈시 펜이 사라지지 않는 버그가 잇습니둥
-
         });
 
         _toggleButton.onClick.AddListener(() =>
@@ -89,22 +90,30 @@ public class MenuUI : MonoBehaviour
 
          });
 
+        _penInfoButton.onClick.AddListener(() =>
+        {
+            _pc.Pen.gameObject.SetActive(false);
+        });
 
+        _backButton.onClick.AddListener(() =>
+        {
+            _pc.Pen.gameObject.SetActive(true);
+        });
+
+
+        _toggleWallMat = Resources.Load<Material>(Const.Materials_ToggleWallMat);
     }
 
     private void SetWall(bool isTransparent)
     {
-        Material _toggleWallMat = Resources.Load<Material>(Const.Materials_ToggleWallMat); //리소스 매니저 안쓰는데 이거 맞나요???   
-        Image image = _toggleButton.GetComponent<Image>();//현재 이미지를 갖고옴
-
         if (isTransparent)
         {
-            image.sprite = Resources.Load<Sprite>(Const.Image_Images_SwitchOff);
+            _toggleButton.image.sprite = ResourceManager.Instance.GetSprite(Const.Image_Images_SwitchOff);
             SetMaterialTransparent(_toggleWallMat);
         }
         else
         {
-            image.sprite= Resources.Load<Sprite>(Const.Image_Images_SwitchOn);
+            _toggleButton.image.sprite= ResourceManager.Instance.GetSprite(Const.Image_Images_SwitchOn);
             SetMaterialOpaque(_toggleWallMat);
         }
  
