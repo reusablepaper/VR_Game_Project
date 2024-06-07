@@ -17,7 +17,7 @@ public class LevelTigger : MonoBehaviour
         GameObject level = Instantiate(rm.GetPrefab(Const.Prefabs_Levels, lc.Level.Level));
 
         // Player
-        player.MainCamera.transform.position = level.transform.position + lc.Level.PlayerOffset;
+        player.transform.position = level.transform.position + lc.Level.PlayerOffset;
 
         // goalPoint
 
