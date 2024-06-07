@@ -15,6 +15,7 @@ public class Ball : MonoBehaviour
     private WaitForSeconds _previewTerm = new WaitForSeconds(3);
 
     private UnityEvent _onStop = new();
+    private bool _hasMoved;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class Ball : MonoBehaviour
             Rigidbody.useGravity = false;
             Rigidbody.velocity = Vector3.zero;
             transform.position = _initPosition;
+            _hasMoved = false;
 
             StartCoroutine(nameof(PreviewRoutine));
         });
@@ -63,12 +65,15 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if(Rigidbody.useGravity == true && Rigidbody.velocity.magnitude < 0.01f)
+        if(_hasMoved && Rigidbody.velocity.magnitude < 0.01f)
         {
             _explosion.Play();
 
             _onStop.Invoke();
-            gameObject.SetActive(false);
+        }
+        else if(!_hasMoved && Rigidbody.velocity.magnitude > 0.01f)
+        {
+            _hasMoved = true;
         }
     }
 }
