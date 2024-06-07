@@ -9,7 +9,6 @@ public class LeftHandController : MonoBehaviour
 
     public MenuUI MenuUI { get; private set; }
 
-
     public UnityEvent OnClickEvent;
     public bool _isUIOpenable;
 

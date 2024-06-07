@@ -21,6 +21,7 @@ public class Ball : MonoBehaviour
 
         lc.Subscribe(LevelState.PrePlaying, () => {
             Rigidbody.useGravity = false;
+            Rigidbody.velocity = Vector3.zero;
             transform.position = _initPosition;
         });
 

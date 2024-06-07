@@ -68,7 +68,7 @@ public class Pen : MonoBehaviour
 
         while(true)
         {
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 0.3f, 1 << LayerMask.NameToLayer("Board")))
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 0.05f, 1 << LayerMask.NameToLayer("Board")))
             {
                 if (hit.transform.parent.TryGetComponent(out board))
                 {
