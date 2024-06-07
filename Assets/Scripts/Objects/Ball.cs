@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour
     private Rigidbody _previewRigid;
     private WaitForSeconds _previewTerm = new WaitForSeconds(3);
 
-    private UnityEvent _onStop;
+    private UnityEvent _onStop = new();
 
     private void Awake()
     {
@@ -26,6 +26,7 @@ public class Ball : MonoBehaviour
         _initPosition = transform.position;
 
         _preview = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        _preview.layer = 1 << LayerMask.NameToLayer("Ball");
         _previewRigid = _preview.AddComponent<Rigidbody>();
 
         lc.Subscribe(LevelState.PrePlaying, () => {
@@ -62,7 +63,7 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if(Rigidbody.velocity.magnitude < 0.01f)
+        if(Rigidbody.useGravity == true && Rigidbody.velocity.magnitude < 0.01f)
         {
             _explosion.Play();
 

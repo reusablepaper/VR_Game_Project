@@ -1194,7 +1194,7 @@ GameObject:
   - component: {fileID: 4106573293074426823}
   - component: {fileID: 7775220546253821134}
   - component: {fileID: 1955670272948419442}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1763,7 +1763,7 @@ GameObject:
   - component: {fileID: 3564360397423396441}
   - component: {fileID: 4745303364946663903}
   - component: {fileID: 7734047877801528176}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}

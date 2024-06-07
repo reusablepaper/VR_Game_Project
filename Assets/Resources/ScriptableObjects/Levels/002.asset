@@ -16,4 +16,4 @@ MonoBehaviour:
   _usablePens: 00000000010000000200000003000000
   _playerOffset: {x: 5, y: 0, z: 2}
   _ballOffset: {x: 8, y: 8, z: 6}
-  _goalOffset: {x: 2, y: 0, z: 9}
+  _goalOffset: {x: 2, y: 0.1, z: 9}

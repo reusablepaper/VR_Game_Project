@@ -41,7 +41,7 @@ public class ResultUI : MonoBehaviour
         //이부분 나중에 fail 처리로 바꿔야함!!!
         _lc.Subscribe(LevelState.Success, () => OpenUi(_startTime, true));
         _lc.Subscribe(LevelState.None, () => gameObject.SetActive(false));
-        _lc.Subscribe(LevelState.Success, () => OpenUi(_startTime, true));
+        _lc.Subscribe(LevelState.Fail, () => OpenUi(_startTime, false));
 
     }
     public void OpenUi(DateTime startTime, bool isSuccessed)

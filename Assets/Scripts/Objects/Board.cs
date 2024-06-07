@@ -33,7 +33,7 @@ public class Board : MonoBehaviour
 
     public void Init(PenController pc)
     {
-        transform.position = pc.Pen.transform.position + pc.Pen.transform.forward * 0.1f;
+        transform.position = pc.Pen.transform.position + pc.Pen.transform.forward * 0.2f;
         transform.LookAt(pc.Pen.transform);
 
         XRGrabInteractable penGrab = pc.Pen.GetComponent<XRGrabInteractable>();
@@ -106,6 +106,12 @@ public class Board : MonoBehaviour
                 case Palette.Blue:
                     vel = ball.Rigidbody.velocity;
                     ball.Rigidbody.velocity = Vector3.Reflect(vel, _normal);
+                    break;
+                case Palette.LightGreen:
+                    ball.transform.localScale = ball.transform.localScale * 0.8f;
+                    break;
+                case Palette.Green:
+                    ball.transform.localScale = ball.transform.localScale * 1.2f;
                     break;
                 case Palette.Yellow:
                     vel = ball.Rigidbody.velocity;

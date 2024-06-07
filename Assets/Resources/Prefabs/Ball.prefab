@@ -9710,8 +9710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a60dfc29fa1064194b014c83b1a428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosion: {fileID: 0}
-  _bounceSFX: {fileID: 0}
+  _explosion: {fileID: 6388457608569210294}
 --- !u!1 &4024097860147104859
 GameObject:
   m_ObjectHideFlags: 0
