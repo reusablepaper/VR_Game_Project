@@ -17,14 +17,14 @@ public class SoundManager : MonoBehaviour
     }
 
     [Header("BGM")]
-    [SerializeField] private AudioClip[] _bgmClips;
+    private AudioClip[] _bgmClips;
     private float _bgmVolume;
     private AudioSource _bgmPlayer;
 
 
     [Header("SFX")]
     private float _sfxVolume;
-    [SerializeField] private int _sfxChannels;
+    private int _sfxChannels = 10;
     private int _sfxIndex;
     private AudioSource[] _sfxPlayers;
 
