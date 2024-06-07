@@ -6,7 +6,7 @@ public class Ball : MonoBehaviour
     private LevelController _levelController;
     private Vector3 _initPosition;
 
-    [SerializeField] private AudioClip _bounceSFX;
+    [SerializeField] private AudioClip _bounceSFs;
 
     private void Awake()
     {
@@ -29,10 +29,5 @@ public class Ball : MonoBehaviour
         lc.Subscribe(LevelState.Playing, () => {
             Rigidbody.useGravity = true;
         });
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        SoundManager.Instance.PlaySFX(_bounceSFX);
     }
 }

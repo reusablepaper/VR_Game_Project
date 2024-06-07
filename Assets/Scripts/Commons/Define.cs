@@ -4,6 +4,7 @@ public enum LevelState
     PrePlaying,
     Playing,
     Success,
+    Fail
 }
 
 public enum Palette
@@ -32,7 +33,18 @@ public enum LevelName
 
 public enum SFX
 {
-    DoorOpen = 0,
-    Bounce = 1,
-
+    BoardPop,
+    Button,
+    Elasticity,
+    Fail,
+    Fast,
+    General,
+    GrabPen,
+    OpenDoor,
+    Pen,
+    SceneTransition,
+    Slow,
+    Success,
+    Teleport,
+    UI,
 }

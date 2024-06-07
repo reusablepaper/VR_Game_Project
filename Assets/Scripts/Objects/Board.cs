@@ -46,6 +46,7 @@ public class Board : MonoBehaviour
 
         _collider.isTrigger = true;
         _collider.enabled = false;
+        SoundManager.Instance.PlaySFX(SFX.BoardPop);
     }
 
     public void Draw(Vector3 pos, Palette color)
@@ -62,6 +63,7 @@ public class Board : MonoBehaviour
         if(_line.positionCount == 0 || (_line.GetPosition(_line.positionCount - 1) - pos).magnitude > _minDistance)
         {
             _line.SetPosition(_line.positionCount++, pos);
+            SoundManager.Instance.PlaySFX(SFX.Pen);
         }
 
         if (_line.positionCount == _inkCount) Finish();
@@ -102,24 +104,30 @@ public class Board : MonoBehaviour
             {
                 case Palette.Black:
                     _collider.isTrigger = false;
+                    SoundManager.Instance.PlaySFX(SFX.General);
                     break;
                 case Palette.Blue:
                     vel = ball.Rigidbody.velocity;
                     ball.Rigidbody.velocity = Vector3.Reflect(vel, _normal);
+                    SoundManager.Instance.PlaySFX(SFX.Elasticity);
                     break;
                 case Palette.LightGreen:
+                    SoundManager.Instance.PlaySFX(SFX.Teleport);
                     //in
                     break;
                 case Palette.Green:
+                    SoundManager.Instance.PlaySFX(SFX.Teleport);
                     //out
                     break;
                 case Palette.Yellow:
                     vel = ball.Rigidbody.velocity;
                     ball.Rigidbody.velocity = vel * 1.5f;
+                    SoundManager.Instance.PlaySFX(SFX.Fast);
                     break;
                 case Palette.Orange:
                     vel = ball.Rigidbody.velocity;
                     ball.Rigidbody.velocity = vel * 0.5f;
+                    SoundManager.Instance.PlaySFX(SFX.Slow);
                     break;
                 case Palette.Gray:
                     SetColor(Palette.Black);

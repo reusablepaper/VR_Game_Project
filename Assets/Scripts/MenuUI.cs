@@ -30,6 +30,7 @@ public class MenuUI : MonoBehaviour
         _leftButton.onClick.AddListener(() =>
         {
             _effect.PlayEffect(_leftButton);
+            SoundManager.Instance.PlaySFX(SFX.Button);
             _pc.prevColor();
 
         });
@@ -37,15 +38,17 @@ public class MenuUI : MonoBehaviour
         _rightButton.onClick.AddListener(() =>
         {
             _effect.PlayEffect(_rightButton);
+            SoundManager.Instance.PlaySFX(SFX.Button);
             _pc.nextColor();
         });
 
         _startButton.onClick.AddListener(() =>
         {
             _effect.PlayEffect(_startButton);
+            SoundManager.Instance.PlaySFX(SFX.Button);
 
             //시작버튼 누를시 벽은 투명이 켜지게됨
-            _isTransparent= true;
+            _isTransparent = true;
             SetWall(_isTransparent);
 
             if (_hasStarted)
@@ -66,7 +69,9 @@ public class MenuUI : MonoBehaviour
 
         _lobbyButton.onClick.AddListener(() =>
         {
+            SoundManager.Instance.PlaySFX(SFX.Button);
             _effect.PlayEffect(_lobbyButton);
+
 
             //로비로 돌아갈 경우 벽의 투명이 꺼짐
             _isTransparent = false;
@@ -82,6 +87,7 @@ public class MenuUI : MonoBehaviour
 
         _toggleButton.onClick.AddListener(() =>
         {
+            SoundManager.Instance.PlaySFX(SFX.Button);
             _effect.PlayEffect(_toggleButton);
 
             _isTransparent = !_isTransparent;
@@ -92,11 +98,13 @@ public class MenuUI : MonoBehaviour
 
         _penInfoButton.onClick.AddListener(() =>
         {
+            SoundManager.Instance.PlaySFX(SFX.Button);
             _pc.Pen.gameObject.SetActive(false);
         });
 
         _backButton.onClick.AddListener(() =>
         {
+            SoundManager.Instance.PlaySFX(SFX.Button);
             _pc.Pen.gameObject.SetActive(true);
         });
 
