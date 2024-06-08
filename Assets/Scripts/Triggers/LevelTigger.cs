@@ -20,6 +20,7 @@ public class LevelTigger : MonoBehaviour
         player.transform.position = level.transform.position + lc.Level.PlayerOffset;
 
         // goalPoint
+        level.GetComponentInChildren<GoalPoint>().Init(lc);
 
         // Ball
         Ball ball = Instantiate(rm.GetPrefab<Ball>(Const.Prefabs_Ball), level.transform.position + lc.Level.BallOffset, Quaternion.identity);
