@@ -70,6 +70,7 @@ public class Board : MonoBehaviour
 
     public void Finish()
     {
+        if (_isFinished) return;
         if (_line.positionCount < 2)
         {
             gameObject.SetActive(false);
