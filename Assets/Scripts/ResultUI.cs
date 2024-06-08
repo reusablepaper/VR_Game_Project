@@ -5,14 +5,12 @@ using UnityEngine.UI;
 public class ResultUI : MonoBehaviour
 {
     [SerializeField] private Button _closeButton;
-    [SerializeField] private Button _lobbyButton;
     [SerializeField] private Text _resultText;
     [SerializeField] private Text _timeText;
     [SerializeField] private Text _tryText;
     [SerializeField] private Text _boardText;
 
     private LevelController _lc;
-    private SceneController _sc;
     private DateTime _startTime;
     private ButtonEffect _effect;
 
