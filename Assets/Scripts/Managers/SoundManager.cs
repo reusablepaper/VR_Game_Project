@@ -102,4 +102,12 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
+
+    public void StopAllSFX()
+    {
+        foreach(var sfxPlayer in _sfxPlayers)
+        {
+            if(sfxPlayer.isPlaying) sfxPlayer.Stop();
+        }
+    }
 }

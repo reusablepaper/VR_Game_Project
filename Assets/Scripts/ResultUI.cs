@@ -5,22 +5,19 @@ using UnityEngine.UI;
 public class ResultUI : MonoBehaviour
 {
     [SerializeField] private Button _closeButton;
-    [SerializeField] private Button _lobbyButton;
     [SerializeField] private Text _resultText;
     [SerializeField] private Text _timeText;
     [SerializeField] private Text _tryText;
     [SerializeField] private Text _boardText;
 
     private LevelController _lc;
-    private SceneController _sc;
     private DateTime _startTime;
     private ButtonEffect _effect;
 
 
-    public void Init(LevelController levelController, SceneController sceneController)
-    {
+    public void Init(LevelController levelController) {
+
         _lc = levelController;
-        _sc = sceneController;
         _startTime = DateTime.Now;
 
 
@@ -28,13 +25,6 @@ public class ResultUI : MonoBehaviour
         {
             _effect.PlayEffect(_closeButton);
             gameObject.SetActive(false);
-        });
-        _lobbyButton.onClick.AddListener(() =>
-        {
-            _effect.PlayEffect(_lobbyButton);
-            gameObject.SetActive(false);
-            _lc.SetState(LevelState.None);
-            _sc.ChangeScene(Const.LobbyScene);
         });
 
 

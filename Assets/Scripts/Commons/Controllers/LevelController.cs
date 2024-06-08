@@ -24,7 +24,7 @@ public class LevelController : MonoBehaviour
         _boardSpawner = new GameObject("Board Spawner").AddComponent<BoardSpawner>();
         _boardSpawner.Init(player.PenController);
         _resultUI = Instantiate(ResourceManager.Instance.GetPrefab<ResultUI>(Const.Prefabs_UIs_ResultUI), player.MainCamera.transform);
-        _resultUI.Init(this, player.SceneController);
+        _resultUI.Init(this);
         _resultUI.gameObject.SetActive(false);
 
         Subscribe(LevelState.Success, () =>

@@ -61,6 +61,7 @@ public class Pen : MonoBehaviour
         {
             _isGrabed = false;
             StopCoroutine(nameof(RaycastForDrawing));
+            SoundManager.Instance.StopAllSFX();
         });
 
     }
