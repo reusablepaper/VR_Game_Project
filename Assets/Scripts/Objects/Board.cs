@@ -114,21 +114,21 @@ public class Board : MonoBehaviour
                     break;
                 case Palette.LightGreen:
                     other.transform.localScale = other.transform.localScale * 0.8f;
-                    SoundManager.Instance.PlaySFX(SFX.Teleport);
+                    SoundManager.Instance.PlaySFX(SFX.BoardPop);
                     break;
                 case Palette.Green:
                     other.transform.localScale = other.transform.localScale * 1.2f;
-                    SoundManager.Instance.PlaySFX(SFX.Teleport);
+                    SoundManager.Instance.PlaySFX(SFX.BoardPop);
                     break;
                 case Palette.Yellow:
                     vel = rigid.velocity;
                     rigid.velocity = vel * 1.5f;
-                    SoundManager.Instance.PlaySFX(SFX.Fast);
+                    SoundManager.Instance.PlaySFX(SFX.Teleport);
                     break;
                 case Palette.Orange:
                     vel = rigid.velocity;
                     rigid.velocity = vel * 0.5f;
-                    SoundManager.Instance.PlaySFX(SFX.Slow);
+                    SoundManager.Instance.PlaySFX(SFX.General);
                     break;
             }
         }
