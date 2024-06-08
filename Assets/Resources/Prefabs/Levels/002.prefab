@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1963822356095635037}
   - component: {fileID: 9036319879635840481}
   - component: {fileID: 5373385854384638238}
+  - component: {fileID: 3918824773786636770}
   m_Layer: 5
   m_Name: GoalPoint
   m_TagString: Untagged
@@ -124,6 +125,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3918824773786636770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356242543247931697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a2b988a3360da4196db5f9ee07b0fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1458019384659300340
 GameObject:
   m_ObjectHideFlags: 0
