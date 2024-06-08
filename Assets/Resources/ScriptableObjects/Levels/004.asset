@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: 004
   m_EditorClassIdentifier: 
   _level: 4
-  _usablePens: 00000000010000000200000003000000040000000500000007000000
-  _playerOffset: {x: 0, y: 0, z: 0}
-  _ballOffset: {x: 0, y: 0, z: 0}
-  _goalOffset: {x: 0, y: 0, z: 0}
-  _tableOffset: {x: 0, y: 0, z: 0}
+  _usablePens: 00000000010000000200000003000000040000000500000006000000
+  _playerOffset: {x: -9, y: 1, z: 11}
+  _ballOffset: {x: -11, y: 3.5, z: 1.5}
+  _goalOffset: {x: -11, y: 3, z: 17}
