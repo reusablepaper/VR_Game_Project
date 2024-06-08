@@ -31,8 +31,7 @@ public class MenuUI : MonoBehaviour
         SetWall(_isTransparent);
 
         //���۹�ư�� ��� �ʱ�ȭ ������
-        Image image = _startButton.GetComponent<Image>();
-        image.sprite = Resources.Load<Sprite>(Const.Image_Images_Start);
+
 
         _leftButton.onClick.AddListener(() =>
         {
@@ -53,8 +52,7 @@ public class MenuUI : MonoBehaviour
         {
             _effect.PlayEffect(_startButton);
             SoundManager.Instance.PlaySFX(SFX.Button);
-
-            //���۹�ư ������ ���� ������ �����Ե�
+ 
             _isTransparent = true;
             SetWall(_isTransparent);
 
@@ -66,7 +64,7 @@ public class MenuUI : MonoBehaviour
             }
 
             else
-            {           //���۹�ư ������ ���۹�ư�� �̹����� redo�̹����� ����
+            {       
                 _startButton.image.sprite = ResourceManager.Instance.GetSprite(Const.Image_Images_Redo);
                 _lc.SetState(LevelState.Playing);
                 _lc.TryCount++;
@@ -80,6 +78,8 @@ public class MenuUI : MonoBehaviour
             SoundManager.Instance.PlaySFX(SFX.Button);
             _effect.PlayEffect(_lobbyButton);
 
+            Image image = _startButton.GetComponent<Image>();
+            image.sprite = Resources.Load<Sprite>(Const.Image_Images_Start);
 
             _lc.SetState(LevelState.None);
             _sc.ChangeScene(Const.LobbyScene);
