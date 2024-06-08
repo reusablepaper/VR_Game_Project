@@ -23,9 +23,13 @@ public class LevelController : MonoBehaviour
 
         _boardSpawner = new GameObject("Board Spawner").AddComponent<BoardSpawner>();
         _boardSpawner.Init(player.PenController);
-        _resultUI = Instantiate(ResourceManager.Instance.GetPrefab<ResultUI>(Const.Prefabs_UIs_ResultUI), player.MainCamera.transform);
-        _resultUI.Init(this, player.SceneController);
-        _resultUI.gameObject.SetActive(false);
+
+        if(_resultUI == null)
+        {
+            _resultUI = Instantiate(ResourceManager.Instance.GetPrefab<ResultUI>(Const.Prefabs_UIs_ResultUI), player.MainCamera.transform);
+            _resultUI.Init(this);
+            _resultUI.gameObject.SetActive(false);
+        }
 
         Subscribe(LevelState.Success, () =>
         {
@@ -47,10 +51,6 @@ public class LevelController : MonoBehaviour
     {
         _state = levelState;
         Publish();
-    }
-    public LevelState GetState()
-    {
-        return _state;
     }
 
     public void Subscribe(LevelState levelState, UnityAction action)

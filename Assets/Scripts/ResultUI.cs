@@ -17,32 +17,26 @@ public class ResultUI : MonoBehaviour
     private ButtonEffect _effect;
 
 
-    public void Init(LevelController levelController, SceneController sceneController)
+    public void Init(LevelController levelController)
     {
         _lc = levelController;
-        _sc = sceneController;
-        _startTime = DateTime.Now;
-
 
         _closeButton.onClick.AddListener(() =>
         {
             _effect.PlayEffect(_closeButton);
             gameObject.SetActive(false);
         });
-        _lobbyButton.onClick.AddListener(() =>
-        {
-            _effect.PlayEffect(_lobbyButton);
-            gameObject.SetActive(false);
-            _lc.SetState(LevelState.None);
-            _sc.ChangeScene(Const.LobbyScene);
-        });
 
+        _lc.Subscribe(LevelState.PrePlaying, Ready);
+    }
 
-        //이부분 나중에 fail 처리로 바꿔야함!!!
+    public void Ready()
+    {
+        _startTime = DateTime.Now;
+
         _lc.Subscribe(LevelState.Success, () => OpenUi(_startTime, true));
         _lc.Subscribe(LevelState.None, () => gameObject.SetActive(false));
         _lc.Subscribe(LevelState.Fail, () => OpenUi(_startTime, false));
-
     }
     public void OpenUi(DateTime startTime, bool isSuccessed)
     {
