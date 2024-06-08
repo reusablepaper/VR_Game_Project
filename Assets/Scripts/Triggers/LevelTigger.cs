@@ -6,7 +6,7 @@ public class LevelTigger : MonoBehaviour
     {
         PlayerController player = FindObjectOfType<PlayerController>();
 
-        LevelController lc = player.GetComponent<LevelController>();
+        LevelController lc = Util.GetOrAddComponent<LevelController>(player.gameObject);
         PenController pc = Util.GetOrAddComponent<PenController>(player.gameObject);
 
         ResourceManager rm = ResourceManager.Instance;
@@ -22,7 +22,7 @@ public class LevelTigger : MonoBehaviour
         // goalPoint
 
         // Ball
-        Ball ball = Instantiate(rm.GetPrefab(Const.Prefabs_Ball), level.transform.position + lc.Level.BallOffset, Quaternion.identity).AddComponent<Ball>();
+        Ball ball = Instantiate(rm.GetPrefab<Ball>(Const.Prefabs_Ball), level.transform.position + lc.Level.BallOffset, Quaternion.identity);
         ball.Init(lc);
 
         player.LeftHand.GetComponent<LeftHandController>().SetUIOpenable(true);

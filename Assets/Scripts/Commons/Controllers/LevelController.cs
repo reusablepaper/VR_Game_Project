@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class LevelController : MonoBehaviour
 {
@@ -21,16 +19,13 @@ public class LevelController : MonoBehaviour
 
     public void Init(PlayerController player)
     {
+        _entries.Clear();
+
         _boardSpawner = new GameObject("Board Spawner").AddComponent<BoardSpawner>();
         _boardSpawner.Init(player.PenController);
-        _resultUI = Instantiate(ResourceManager.Instance.GetPrefab<ResultUI>(Const.Prefabs_UIs_ResultUI), transform);
-        _resultUI.transform.position = transform.forward * 0.5f;
-        _resultUI.transform.LookAt(transform);
+        _resultUI = Instantiate(ResourceManager.Instance.GetPrefab<ResultUI>(Const.Prefabs_UIs_ResultUI), player.MainCamera.transform);
         _resultUI.Init(this, player.SceneController);
         _resultUI.gameObject.SetActive(false);
-   
-
-        _entries.Clear();
 
         Subscribe(LevelState.Success, () =>
         {

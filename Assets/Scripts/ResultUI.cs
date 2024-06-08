@@ -49,7 +49,7 @@ public class ResultUI : MonoBehaviour
         _resultText.text = isSuccessed ? "SUCCESS" : "FAIL";
 
         TimeSpan duration = DateTime.Now - startTime;
-        _timeText.text = $"{duration.TotalSeconds / 60}m {duration.TotalSeconds % 60}s";
+        _timeText.text = $"{(int)duration.TotalSeconds / 60}m {(int)duration.TotalSeconds % 60}s";
         _tryText.text = $"{_lc.TryCount}";
         _boardText.text = _lc.BoardSpawner.BoardCount.ToString();
     }

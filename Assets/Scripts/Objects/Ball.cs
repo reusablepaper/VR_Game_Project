@@ -14,8 +14,7 @@ public class Ball : MonoBehaviour
     private Rigidbody _previewRigid;
     private WaitForSeconds _previewTerm = new WaitForSeconds(3);
 
-    private UnityEvent _onStop = new();
-    private bool _hasMoved;
+    private LevelController _lc;
 
     private void Awake()
     {
@@ -25,6 +24,7 @@ public class Ball : MonoBehaviour
     public void Init(LevelController lc)
     {
         _initPosition = transform.position;
+        _lc = lc;
 
         _preview = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         _preview.layer = LayerMask.NameToLayer("Ball");
@@ -34,8 +34,8 @@ public class Ball : MonoBehaviour
             _rigidbody.useGravity = false;
             _rigidbody.velocity = Vector3.zero;
             transform.position = _initPosition;
-            _hasMoved = false;
 
+            _previewRigid.velocity = Vector3.zero;
             _preview.SetActive(true);
             StartCoroutine(nameof(PreviewRoutine));
         });
@@ -50,8 +50,6 @@ public class Ball : MonoBehaviour
         lc.Subscribe(LevelState.None, () => {
             StopCoroutine(nameof(PreviewRoutine));
         });
-
-        _onStop.AddListener(() => lc.SetState(LevelState.Fail));
     }
 
     private IEnumerator PreviewRoutine()
@@ -62,20 +60,6 @@ public class Ball : MonoBehaviour
             _previewRigid.velocity = Vector3.zero;
 
             yield return _previewTerm;
-        }
-    }
-
-    private void Update()
-    {
-        if(_hasMoved && _rigidbody.velocity.magnitude < 0.01f)
-        {
-            _explosion.Play();
-
-            _onStop.Invoke();
-        }
-        else if(!_hasMoved && _rigidbody.velocity.magnitude > 0.01f)
-        {
-            _hasMoved = true;
         }
     }
 }
