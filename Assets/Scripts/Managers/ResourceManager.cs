@@ -21,6 +21,7 @@ public class ResourceManager : MonoBehaviour
     private Dictionary<string, GameObject> _prefabs;
     private Dictionary<string, ScriptableObject> _scriptableObjects;
     private Dictionary<string, Sprite> _sprites;
+    private Dictionary<string, AudioClip> _audioClips;
 
     public void Flush()
     {
@@ -104,5 +105,23 @@ public class ResourceManager : MonoBehaviour
         }
 
         return sprite;
+    }
+
+    public AudioClip GetAudioClip(SFX sfxName)
+    {
+        string path = Path.Combine(Const.Sounds, sfxName.ToString());
+
+        if (_audioClips == null) _audioClips = new();
+
+        if (!_audioClips.TryGetValue(path, out AudioClip clip))
+        {
+            clip = Resources.Load<AudioClip>(path);
+            if (clip != null)
+            {
+                _audioClips.Add(path, clip);
+            }
+        }
+
+        return clip;
     }
 }

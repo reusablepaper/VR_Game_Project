@@ -4,6 +4,7 @@ public class GameTrigger : MonoBehaviour
 {
     private void Awake()
     {
+        PlayerPrefs.SetInt("Level", 0);
         PlayerController player = Instantiate(ResourceManager.Instance.GetPrefab<PlayerController>(Const.Prefabs_Player));
 
         DontDestroyOnLoad(player);

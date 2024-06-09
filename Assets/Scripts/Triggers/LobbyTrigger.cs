@@ -10,10 +10,10 @@ public class LobbyTrigger : MonoBehaviour
 
         Instantiate(ResourceManager.Instance.GetPrefab(Const.Prefabs_Lobby));
 
-        player.gameObject.transform.position = Vector3.zero;
+        player.transform.position = Vector3.zero;
 
         leftHand.SetUIOpenable(false);
-        leftHand.MenuUI.gameObject.SetActive(false);
+        leftHand.OnEnterLobby(); 
         player.PenController.Pen.gameObject.SetActive(false);
     }
 }

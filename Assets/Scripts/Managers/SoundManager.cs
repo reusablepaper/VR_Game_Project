@@ -17,20 +17,21 @@ public class SoundManager : MonoBehaviour
     }
 
     [Header("BGM")]
-    [SerializeField] private AudioClip[] _bgmClips;
+    private AudioClip[] _bgmClips;
     private float _bgmVolume;
     private AudioSource _bgmPlayer;
 
 
     [Header("SFX")]
-    private float _sfxVolume;
-    [SerializeField] private int _sfxChannels;
+    private float _sfxVolume = 20;
+    private int _sfxChannels = 10;
     private int _sfxIndex;
     private AudioSource[] _sfxPlayers;
 
     void Awake()
     {
         Init();
+        
     }
 
     void Init()
@@ -70,8 +71,10 @@ public class SoundManager : MonoBehaviour
             _bgmPlayer.Stop();
     }
 
-    public void PlaySFX(AudioClip sfxClip)
+    public void PlaySFX(SFX sfx)
     {
+        AudioClip sfxClip = ResourceManager.Instance.GetAudioClip(sfx);
+
         for (int i = 0; i < _sfxChannels; i++)
         {
             int loopIndex = (i + _sfxIndex) % _sfxChannels;
@@ -97,6 +100,14 @@ public class SoundManager : MonoBehaviour
             {
                 _sfxPlayers[i].volume = value;
             }
+        }
+    }
+
+    public void StopAllSFX()
+    {
+        foreach(var sfxPlayer in _sfxPlayers)
+        {
+            if(sfxPlayer.isPlaying) sfxPlayer.Stop();
         }
     }
 }

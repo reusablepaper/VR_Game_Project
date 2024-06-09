@@ -43,6 +43,7 @@ public class Pen : MonoBehaviour
 
         XRGrabInteractable _grab = GetComponent<XRGrabInteractable>();
         _grab.selectEntered.AddListener((SelectEnterEventArgs args) => { _isGrabed = true; });
+        SoundManager.Instance.PlaySFX(SFX.GrabPen);
         _grab.selectExited.AddListener((SelectExitEventArgs args) =>
         {
             _isGrabed = false;
@@ -50,14 +51,15 @@ public class Pen : MonoBehaviour
         });
         _grab.activated.AddListener((ActivateEventArgs args) =>
         {
-            _isGrabed = true;
             _levelContoller.BoardSpawner.SpawnBoard();
             StartCoroutine(nameof(RaycastForDrawing));
+            SoundManager.Instance.PlaySFX(SFX.Pen);
+
         });
         _grab.deactivated.AddListener((DeactivateEventArgs args) =>
         {
-            _isGrabed = false;
             StopCoroutine(nameof(RaycastForDrawing));
+            SoundManager.Instance.StopAllSFX();
         });
 
     }
@@ -68,7 +70,7 @@ public class Pen : MonoBehaviour
 
         while(true)
         {
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 0.1f, 1 << LayerMask.NameToLayer("Board")))
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 0.2f, 1 << LayerMask.NameToLayer("Board")))
             {
                 if (hit.transform.parent.TryGetComponent(out board))
                 {

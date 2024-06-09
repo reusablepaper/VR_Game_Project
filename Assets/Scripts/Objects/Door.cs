@@ -34,6 +34,8 @@ public class Door : MonoBehaviour
 
         _coroutine = StartCoroutine(OpenRoutine(Quaternion.Euler(0f, _door.transform.rotation.y + 0f, 0f), Quaternion.Euler(0f, 90f, 0f)));
 
+        SoundManager.Instance.PlaySFX(SFX.OpenDoor);
+
         _enterBox.enabled = true;
     }
 

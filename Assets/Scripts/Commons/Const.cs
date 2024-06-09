@@ -11,6 +11,7 @@ public abstract class Const
 
     public const string Prefabs_FaderScreen = "Prefabs/FaderScreen";
     public const string Prefabs_UIs_MenuUI= "Prefabs/UIs/MenuUI";
+    public const string Prefabs_UIs_ResultUI = "Prefabs/UIs/ResultUI";
     public const string ScriptableObjects_Levels = "ScriptableObjects/Levels";
     public const string Materials_ToggleWallMat = "Materials/ToggleWallMat";
 
