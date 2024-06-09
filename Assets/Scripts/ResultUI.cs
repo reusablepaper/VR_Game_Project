@@ -19,11 +19,6 @@ public class ResultUI : MonoBehaviour
     {
         _lc = levelController;
 
-        _closeButton.onClick.AddListener(() =>
-        {
-            _effect.PlayEffect(_closeButton);
-            gameObject.SetActive(false);
-        });
 
         _lc.Subscribe(LevelState.PrePlaying, Ready);
     }

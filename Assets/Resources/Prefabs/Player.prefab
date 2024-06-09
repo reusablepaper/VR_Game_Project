@@ -948,7 +948,7 @@ MonoBehaviour:
   _rightHand: {fileID: 8590231954739553894}
   _mainCamera: {fileID: 3403704837867946054}
   LeftMenuAction: {fileID: 3884377519400177886, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  RightMenuAction: {fileID: -2073311069342964744, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  RightMenuAction: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1 &4843974865741018448
 GameObject:
   m_ObjectHideFlags: 0
