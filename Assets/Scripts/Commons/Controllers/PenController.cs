@@ -23,8 +23,8 @@ public class PenController : MonoBehaviour
     }
     public void prevColor()
     {
-        _penColor--;
-        Pen.SetColor(_levelController.Level.UseablePens[_penColor % _levelController.Level.UseablePens.Count]);
+        _penColor = (_levelController.Level.UseablePens.Count + _penColor - 1) % _levelController.Level.UseablePens.Count;
+        Pen.SetColor(_levelController.Level.UseablePens[_penColor]);
     }
 
     public void OnEnterLobby()

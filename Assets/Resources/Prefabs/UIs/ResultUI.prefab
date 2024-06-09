@@ -246,7 +246,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &4443523194692763407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,7 +277,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _closeButton: {fileID: 3305891431133962215}
-  _lobbyButton: {fileID: 0}
   _resultText: {fileID: 8781252334468708813}
   _timeText: {fileID: 749311281085419051}
   _tryText: {fileID: 3691018346210300459}
@@ -528,7 +527,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7786501522971455619}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3149879303481777284}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4647605570464975705
 GameObject:
   m_ObjectHideFlags: 0

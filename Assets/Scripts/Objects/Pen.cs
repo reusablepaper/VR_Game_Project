@@ -51,7 +51,6 @@ public class Pen : MonoBehaviour
         });
         _grab.activated.AddListener((ActivateEventArgs args) =>
         {
-            _isGrabed = true;
             _levelContoller.BoardSpawner.SpawnBoard();
             StartCoroutine(nameof(RaycastForDrawing));
             SoundManager.Instance.PlaySFX(SFX.Pen);
@@ -59,7 +58,6 @@ public class Pen : MonoBehaviour
         });
         _grab.deactivated.AddListener((DeactivateEventArgs args) =>
         {
-            _isGrabed = false;
             StopCoroutine(nameof(RaycastForDrawing));
             SoundManager.Instance.StopAllSFX();
         });

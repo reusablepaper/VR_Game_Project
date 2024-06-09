@@ -12,7 +12,7 @@ public class Ball : MonoBehaviour
 
     private GameObject _preview;
     private Rigidbody _previewRigid;
-    private WaitForSeconds _previewTerm = new WaitForSeconds(3);
+    private WaitForSeconds _previewTerm = new WaitForSeconds(5);
 
     private LevelController _lc;
 
@@ -34,12 +34,14 @@ public class Ball : MonoBehaviour
             _rigidbody.useGravity = false;
             _rigidbody.velocity = Vector3.zero;
             transform.position = _initPosition;
+            transform.localScale = Vector3.one * 3.33f;
 
             _previewRigid.velocity = Vector3.zero;
+            _preview.transform.localScale = Vector3.one;
             _preview.SetActive(true);
             StartCoroutine(nameof(PreviewRoutine));
         });
-
+        
         lc.Subscribe(LevelState.Playing, () => {
             _rigidbody.useGravity = true;
 
@@ -56,6 +58,7 @@ public class Ball : MonoBehaviour
     {
         while(true)
         {
+            _preview.transform.localScale = Vector3.one;
             _preview.transform.position = _initPosition;
             _previewRigid.velocity = Vector3.zero;
 

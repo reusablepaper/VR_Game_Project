@@ -112,7 +112,9 @@ public class MenuUI : MonoBehaviour
 
 
         _toggleWallMat = Resources.Load<Material>(Const.Materials_ToggleWallMat);
-    }
+
+        SetWall(false);
+}
 
     private void SetWall(bool isTransparent)
     {
